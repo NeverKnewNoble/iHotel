@@ -1,0 +1,722 @@
+<!-- html -->
+<div class="ihotel-dashboard">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="header-text">
+                <h1 class="dashboard-title">iHotel Dashboard</h1>
+                <p class="dashboard-subtitle">Manage your hotel operations efficiently</p>
+            </div>
+            <a href="/app/ihotel-settings" class="settings-button" title="Hotel Settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Information Section Cards -->
+    <div class="info-section-grid">
+        <div class="info-section-card core">
+            <div class="info-icon-wrapper core">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#3b82f6"/>
+                    <polyline points="9 22 9 12 15 12 15 22" stroke="#3b82f6"/>
+                </svg>
+            </div>
+            <div class="info-content">
+                <div class="info-title">Core Management</div>
+                <div class="info-desc">Guests, rooms, stays & services</div>
+            </div>
+        </div>
+
+        <div class="info-section-card housekeeping">
+            <div class="info-icon-wrapper housekeeping">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#3b82f6"/>
+                </svg>
+            </div>
+            <div class="info-content">
+                <div class="info-title">Housekeeping</div>
+                <div class="info-desc">Track & manage tasks</div>
+            </div>
+        </div>
+
+        <div class="info-section-card maintenance">
+            <div class="info-icon-wrapper maintenance">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="#3b82f6"/>
+                </svg>
+            </div>
+            <div class="info-content">
+                <div class="info-title">Maintenance</div>
+                <div class="info-desc">Requests & repairs</div>
+            </div>
+        </div>
+
+        <div class="info-section-card audit">
+            <div class="info-icon-wrapper audit">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="#3b82f6"/>
+                </svg>
+            </div>
+            <div class="info-content">
+                <div class="info-title">Night Audit</div>
+                <div class="info-desc">Reports & analytics</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All DocTypes Section -->
+    <div class="doctypes-section">
+        <h2 class="doctypes-title">Quick Access</h2>
+        <div class="doctype-grid">
+            <!-- Amenity -->
+            <a
+                href="/app/amenity"
+                class="doctype-button amenity"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Amenity</h4>
+            </a>
+
+            <!-- Room Type -->
+            <a
+                href="/app/room-type"
+                class="doctype-button room-type"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Room Type</h4>
+            </a>
+
+            <!-- Room -->
+            <a
+                href="/app/room"
+                class="doctype-button room"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M5 21V7l8-4v14M19 21V11l-6-4"/>
+                        <path d="M9 9v0M9 12v0M9 15v0M9 18v0"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Room</h4>
+            </a>
+
+            <!-- Guest -->
+            <a
+                href="/app/guest"
+                class="doctype-button guest"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Guest</h4>
+            </a>
+
+            <!-- Hotel Stay -->
+            <a
+                href="/app/hotel-stay"
+                class="doctype-button hotel-stay"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Hotel Stay</h4>
+            </a>
+
+            <!-- Hotel Service -->
+            <a
+                href="/app/hotel-service"
+                class="doctype-button hotel-service"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Hotel Service</h4>
+            </a>
+
+            <!-- Housekeeping Task -->
+            <a
+                href="/app/housekeeping-task"
+                class="doctype-button housekeeping-task"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Housekeeping Task</h4>
+            </a>
+
+            <!-- Maintenance Request -->
+            <a
+                href="/app/maintenance-request"
+                class="doctype-button maintenance-request"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Maintenance Request</h4>
+            </a>
+
+            <!-- Night Audit -->
+            <a
+                href="/app/night-audit"
+                class="doctype-button night-audit"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Night Audit</h4>
+            </a>
+
+            <!-- Occupancy Report -->
+            <a
+                href="/app/query-report/occupancy-report"
+                class="doctype-button occupancy-report"
+            >
+                <div class="doctype-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <h4 class="doctype-title">Occupancy Report</h4>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- css -->
+/* Theme-aware CSS Variables - Blue, White, Black Theme */
+.ihotel-dashboard {
+	--bg-primary: var(--bg-color, #ffffff);
+	--bg-card: var(--card-bg, #ffffff);
+	--text-primary: var(--text-color, #000000);
+	--text-secondary: var(--text-muted, #4b5563);
+	--border-color: var(--border-color, #3b82f6);
+	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	--primary-color: #3b82f6;
+	--primary-light: #dbeafe;
+	--primary-dark: #1e40af;
+	--accent-blue: #2563eb;
+	--accent-light-blue: #60a5fa;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ihotel-dashboard,
+body.dark-mode .ihotel-dashboard {
+	--bg-primary: #1a1a1a;
+	--bg-card: #2d2d2d;
+	--text-primary: #f5f5f5;
+	--text-secondary: #a0a0a0;
+	--border-color: #404040;
+}
+
+/* Dashboard Container */
+.ihotel-dashboard {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+	background-color: var(--bg-primary);
+	min-height: 100vh;
+	transition: background-color 0.3s ease;
+}
+
+/* Header Styles */
+.dashboard-header {
+	margin-bottom: 2rem;
+	position: relative;
+}
+
+.header-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+	position: relative;
+}
+
+.header-text {
+	text-align: center;
+	flex: 1;
+	min-width: 0;
+}
+
+@media (max-width: 640px) {
+	.header-content {
+		flex-direction: column;
+	}
+
+	.settings-button {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	.header-text {
+		width: 100%;
+		padding-right: 3rem;
+	}
+}
+
+.dashboard-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: var(--primary-color);
+	margin-bottom: 0.5rem;
+}
+
+.dashboard-subtitle {
+	color: var(--text-secondary);
+	font-size: 1.125rem;
+}
+
+.settings-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--bg-card);
+	border: 1px solid #000000;
+	color: var(--text-primary);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.settings-button:hover {
+	background-color: var(--primary-color);
+	color: white;
+	border-color: var(--primary-color);
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.settings-button svg {
+	width: 20px;
+	height: 20px;
+}
+
+/* Info Section Cards - Slim and Non-clickable */
+.info-section-grid {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 1rem;
+	margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+	.info-section-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.info-section-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.info-section-card {
+	background: var(--bg-card);
+	border-radius: 0.5rem;
+	padding: 1rem 1.25rem;
+	/*box-shadow: var(--shadow-sm);*/
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.info-icon-wrapper {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.info-icon-wrapper.core {
+	background: var(--primary-light);
+}
+
+.info-icon-wrapper.housekeeping {
+	background: var(--primary-light);
+}
+
+.info-icon-wrapper.maintenance {
+	background: var(--primary-light);
+}
+
+.info-icon-wrapper.audit {
+	background: var(--primary-light);
+}
+
+.info-icon {
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
+.info-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.info-title {
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin-bottom: 0.25rem;
+}
+
+.info-desc {
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+	line-height: 1.4;
+}
+
+/* DocType Buttons Section */
+.doctypes-section {
+	background-color: var(--bg-card);
+	border-radius: 0.75rem;
+	/*box-shadow: var(--shadow-md);*/
+	padding: 2rem;
+	transition: background-color 0.3s ease;
+}
+
+.doctypes-title {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: var(--primary-color);
+	margin-bottom: 1.5rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 2px solid var(--primary-color);
+}
+
+/* DocType Buttons Grid */
+.doctype-grid {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 1rem;
+}
+
+@media (min-width: 640px) {
+	.doctype-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.doctype-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* DocType Button Cards */
+.doctype-button {
+	border-radius: 0.5rem;
+	padding: 0.875rem 1.25rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	min-height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	gap: 0.75rem;
+	width: 100%;
+	font-family: inherit;
+	text-decoration: none;
+	border: 1px solid;
+}
+
+/* Color schemes for each doctype */
+.doctype-button.amenity {
+	background-color: #06b6d4;
+	border-color: #06b6d4;
+}
+
+.doctype-button.amenity:hover {
+	background-color: #0891b2;
+	border-color: #0891b2;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.room-type {
+	background-color: #14b8a6;
+	border-color: #14b8a6;
+}
+
+.doctype-button.room-type:hover {
+	background-color: #0d9488;
+	border-color: #0d9488;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.room {
+	background-color: #10b981;
+	border-color: #10b981;
+}
+
+.doctype-button.room:hover {
+	background-color: #059669;
+	border-color: #059669;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.guest {
+	background-color: #8b5cf6;
+	border-color: #8b5cf6;
+}
+
+.doctype-button.guest:hover {
+	background-color: #7c3aed;
+	border-color: #7c3aed;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.hotel-stay {
+	background-color: #f59e0b;
+	border-color: #f59e0b;
+}
+
+.doctype-button.hotel-stay:hover {
+	background-color: #d97706;
+	border-color: #d97706;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.hotel-service {
+	background-color: #ec4899;
+	border-color: #ec4899;
+}
+
+.doctype-button.hotel-service:hover {
+	background-color: #db2777;
+	border-color: #db2777;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.housekeeping-task {
+	background-color: #eab308;
+	border-color: #eab308;
+}
+
+.doctype-button.housekeeping-task:hover {
+	background-color: #ca8a04;
+	border-color: #ca8a04;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.maintenance-request {
+	background-color: #ef4444;
+	border-color: #ef4444;
+}
+
+.doctype-button.maintenance-request:hover {
+	background-color: #dc2626;
+	border-color: #dc2626;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.night-audit {
+	background-color: #6366f1;
+	border-color: #6366f1;
+}
+
+.doctype-button.night-audit:hover {
+	background-color: #4f46e5;
+	border-color: #4f46e5;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button.occupancy-report {
+	background-color: #3b82f6;
+	border-color: #3b82f6;
+}
+
+.doctype-button.occupancy-report:hover {
+	background-color: #2563eb;
+	border-color: #2563eb;
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+}
+
+.doctype-button:active {
+	transform: translateY(0);
+}
+
+.doctype-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 0.375rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.doctype-icon svg {
+	width: 16px;
+	height: 16px;
+	stroke: white;
+}
+
+.doctype-title {
+	font-weight: 600;
+	font-size: 1rem;
+	color: white;
+	margin: 0;
+}
+
+.doctype-badge {
+	display: inline-block;
+	padding: 0.2rem 0.6rem;
+	background-color: var(--primary-color);
+	color: white;
+	border-radius: 9999px;
+	font-size: 0.7rem;
+	font-weight: 500;
+	margin-top: 0.375rem;
+}
+
+
+
+
+<!-- js: -->
+// ============================================
+// Theme Detection and Adaptation
+// ============================================
+function detectFrappeTheme() {
+	// Check for Frappe theme attributes
+	const html = document.documentElement;
+	const body = document.body;
+
+	// Check if dark mode is active
+	const isDark = html.getAttribute('data-theme') === 'dark' ||
+				  body.classList.contains('dark-mode') ||
+				  html.classList.contains('dark-mode') ||
+				  window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+	// Apply theme to dashboard
+	const dashboard = document.querySelector('.ihotel-dashboard');
+	if (dashboard) {
+		if (isDark) {
+			dashboard.setAttribute('data-theme', 'dark');
+		} else {
+			dashboard.setAttribute('data-theme', 'light');
+		}
+	}
+
+	// Try to get Frappe CSS variables
+	const computedStyle = getComputedStyle(document.body);
+	const bgColor = computedStyle.getPropertyValue('--bg-color') ||
+				   computedStyle.getPropertyValue('--control-bg') ||
+				   null;
+
+	if (bgColor && dashboard) {
+		dashboard.style.setProperty('--bg-primary', bgColor.trim());
+	}
+}
+
+// Watch for theme changes
+function watchThemeChanges() {
+	// Watch for attribute changes
+	const observer = new MutationObserver(detectFrappeTheme);
+	observer.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ['data-theme', 'class']
+	});
+	observer.observe(document.body, {
+		attributes: true,
+		attributeFilter: ['class']
+	});
+
+	// Watch for media query changes
+	const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+	mediaQuery.addEventListener('change', detectFrappeTheme);
+}
+
+
+// ============================================
+// Initialize on DOM Ready
+// ============================================
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', () => {
+		detectFrappeTheme();
+		watchThemeChanges();
+	});
+} else {
+	detectFrappeTheme();
+	watchThemeChanges();
+}

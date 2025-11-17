@@ -1,0 +1,34 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"n7wlPv2uO9\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"iHotel\",\"col\":12}}]",
+ "creation": "2025-11-13 23:34:05.309440",
+ "custom_blocks": [
+  {
+   "custom_block_name": "iHotel",
+   "label": "iHotel"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "iHotel",
+ "links": [],
+ "modified": "2025-11-14 01:20:23.170614",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "iHotel",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 3.0,
+ "shortcuts": [],
+ "title": "iHotel"
+}

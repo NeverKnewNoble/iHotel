@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:performed_by",
+ "creation": "2025-11-13 23:29:34.572886",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "audit_date",
+  "performed_by",
+  "column_break_umnr",
+  "audit_time",
+  "section_break_qnuq",
+  "total_rooms",
+  "occupied_rooms",
+  "column_break_sqnr",
+  "occupancy_rate",
+  "total_revenue",
+  "section_break_dbgv",
+  "audit_notes"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "audit_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Audit Date"
+  },
+  {
+   "fieldname": "performed_by",
+   "fieldtype": "Link",
+   "label": "Performed By",
+   "options": "User",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_umnr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "audit_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Audit Time"
+  },
+  {
+   "fieldname": "section_break_qnuq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_rooms",
+   "fieldtype": "Int",
+   "label": "Total Rooms"
+  },
+  {
+   "fieldname": "occupied_rooms",
+   "fieldtype": "Int",
+   "label": "Occupied Rooms"
+  },
+  {
+   "fieldname": "column_break_sqnr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "occupancy_rate",
+   "fieldtype": "Percent",
+   "label": "Occupancy Rate"
+  },
+  {
+   "fieldname": "total_revenue",
+   "fieldtype": "Currency",
+   "label": "Total Revenue"
+  },
+  {
+   "fieldname": "section_break_dbgv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "audit_notes",
+   "fieldtype": "Text Editor",
+   "label": "Audit Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-11-16 19:52:37.942018",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "Night Audit",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

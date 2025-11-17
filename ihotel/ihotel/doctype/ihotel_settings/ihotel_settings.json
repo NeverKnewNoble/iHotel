@@ -1,0 +1,105 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-11-13 22:47:50.594883",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "hotel_name",
+  "section_break_troq",
+  "email",
+  "total_rooms",
+  "column_break_kjka",
+  "contact_number",
+  "section_break_couq",
+  "address",
+  "section_break_djqb",
+  "default_check_in_time",
+  "column_break_ympd",
+  "default_check_out_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "hotel_name",
+   "fieldtype": "Data",
+   "label": "Hotel Name"
+  },
+  {
+   "fieldname": "section_break_troq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "column_break_kjka",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number"
+  },
+  {
+   "fieldname": "section_break_couq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "section_break_djqb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "12:00:00",
+   "fieldname": "default_check_in_time",
+   "fieldtype": "Time",
+   "label": "Default Check In Time"
+  },
+  {
+   "fieldname": "column_break_ympd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "14:00:00",
+   "fieldname": "default_check_out_time",
+   "fieldtype": "Time",
+   "label": "Default Check Out Time"
+  },
+  {
+   "fieldname": "total_rooms",
+   "fieldtype": "Int",
+   "label": "Total Rooms"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-11-16 17:34:00.850742",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "iHotel Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

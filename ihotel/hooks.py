@@ -21,6 +21,10 @@ app_license = "mit"
 # 	}
 # ]
 
+# app_include_icons = [
+#     "ihotel/public/icons/my_custom_icons.svg"
+# ]
+
 # Includes in <head>
 # ------------------
 

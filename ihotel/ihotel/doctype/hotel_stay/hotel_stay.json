@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:guest",
+ "creation": "2025-11-13 23:02:20.996524",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "guest",
+  "section_break_uvsf",
+  "room_type",
+  "expected_check_in",
+  "actual_check_in",
+  "column_break_xpyn",
+  "room",
+  "expected_check_out",
+  "actual_check_out",
+  "section_break_rbyp",
+  "status",
+  "room_rate",
+  "column_break_vvzc",
+  "nights",
+  "total_amount",
+  "section_break_ygin",
+  "additional_services",
+  "payment_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "label": "Guest",
+   "options": "Guest",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_uvsf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "label": "Room Type",
+   "options": "Room Type"
+  },
+  {
+   "fieldname": "expected_check_in",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Expected Check In"
+  },
+  {
+   "fieldname": "actual_check_in",
+   "fieldtype": "Datetime",
+   "label": "Actual Check In"
+  },
+  {
+   "fieldname": "column_break_xpyn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "link_filters": "[]",
+   "options": "Room"
+  },
+  {
+   "fieldname": "expected_check_out",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Expected Check Out"
+  },
+  {
+   "fieldname": "actual_check_out",
+   "fieldtype": "Datetime",
+   "label": "Actual Check Out"
+  },
+  {
+   "fieldname": "section_break_rbyp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Reserved",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Reserved\nChecked\nChecked Out\nNo Show\nCancelled"
+  },
+  {
+   "fieldname": "room_rate",
+   "fieldtype": "Currency",
+   "label": "Room Rate"
+  },
+  {
+   "fieldname": "column_break_vvzc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "nights",
+   "fieldtype": "Int",
+   "label": "Nights"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "section_break_ygin",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "additional_services",
+   "fieldtype": "Table",
+   "label": "Additional Services",
+   "options": "Stay Service Item"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "Pending\nPartially Paid\nPaid\nRefunded"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-11-16 19:50:05.198697",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "Hotel Stay",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
