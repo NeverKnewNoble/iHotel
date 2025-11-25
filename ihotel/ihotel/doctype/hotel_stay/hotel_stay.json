@@ -23,7 +23,11 @@
   "total_amount",
   "section_break_ygin",
   "additional_services",
-  "payment_status"
+  "folio_tab",
+  "profile",
+  "column_break_surq",
+  "payment_status",
+  "amended_from"
  ],
  "fields": [
   {
@@ -50,6 +54,7 @@
    "label": "Expected Check In"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "actual_check_in",
    "fieldtype": "Datetime",
    "label": "Actual Check In"
@@ -72,6 +77,7 @@
    "label": "Expected Check Out"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "actual_check_out",
    "fieldtype": "Datetime",
    "label": "Actual Check Out"
@@ -81,11 +87,11 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "default": "Reserved",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Status",
    "options": "Reserved\nChecked\nChecked Out\nNo Show\nCancelled"
   },
@@ -119,17 +125,45 @@
    "options": "Stay Service Item"
   },
   {
-   "default": "Pending",
+   "allow_on_submit": 1,
+   "default": "Open",
+   "fetch_from": "profile.status",
    "fieldname": "payment_status",
-   "fieldtype": "Select",
-   "label": "Payment Status",
-   "options": "Pending\nPartially Paid\nPaid\nRefunded"
+   "fieldtype": "Data",
+   "label": "Payment Status"
+  },
+  {
+   "fieldname": "folio_tab",
+   "fieldtype": "Tab Break",
+   "label": "Profile"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "profile",
+   "fieldtype": "Link",
+   "label": "Profile",
+   "options": "iHotel Profile"
+  },
+  {
+   "fieldname": "column_break_surq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hotel Stay",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-11-16 19:50:05.198697",
+ "modified": "2025-11-25 15:09:00.218503",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Hotel Stay",
@@ -146,6 +180,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

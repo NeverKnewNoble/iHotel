@@ -1,14 +1,6 @@
 # Copyright (c) 2025, Noble and contributors
 # For license information, please see license.txt
 
-# import frappe
-# from frappe.model.document import Document
-
-
-# class HotelStay(Document):
-# 	pass
-
-
 
 import frappe
 from frappe.model.document import Document
@@ -111,15 +103,25 @@ class HotelStay(Document):
         """
         Update room status when hotel stay is submitted.
         """
-        if self.status == "Reserved" and self.room:
-            # Update room status to Occupied when reservation is confirmed
-            try:
-                room = frappe.get_doc("Room", self.room)
-                room.status = "Occupied"
-                room.save(ignore_permissions=True)
-            except Exception as e:
-                frappe.log_error(f"Error updating room status: {str(e)}")
-                frappe.throw(_("Error updating room status: {0}").format(str(e)))
+        if self.status == "Reserved":
+            self.mark_room_as_occupied()
+
+
+
+    def on_update(self):
+        """
+        Keep associated room status in sync with the stay lifecycle.
+        """
+        self.sync_room_status()
+
+    def on_update_after_submit(self):
+        """
+        Frappe calls this hook when a submitted stay is edited (e.g., check-in/out).
+        """
+        self.sync_room_status()
+
+
+
 
     def on_cancel(self):
         """
@@ -143,3 +145,57 @@ class HotelStay(Document):
             except Exception as e:
                 frappe.log_error(f"Error updating room status on cancel: {str(e)}")
                 # Don't throw error to allow cancellation
+
+    def mark_room_as_occupied(self):
+        """
+        Sync the linked room document so that its status mirrors an active stay.
+        """
+        if not self.room:
+            return
+
+        try:
+            room = frappe.get_doc("Room", self.room)
+
+            # Update only when the room is not already marked as occupied
+            if room.status != "Occupied":
+                room.status = "Occupied"
+                room.save(ignore_permissions=True)
+        except Exception as e:
+            message = _("Error updating room status: {0}").format(str(e))
+            frappe.log_error(message)
+            frappe.throw(message)
+
+    def mark_room_as_available(self):
+        """
+        Free the linked room when the stay completes and no other active stays remain.
+        """
+        if not self.room:
+            return
+
+        try:
+            # Ensure there isn't another active stay keeping the room busy
+            active_stay_exists = frappe.db.exists("Hotel Stay", {
+                "room": self.room,
+                "status": ["in", ["Reserved", "Checked"]],
+                "docstatus": 1,
+                "name": ["!=", self.name]
+            })
+
+            if not active_stay_exists:
+                room = frappe.get_doc("Room", self.room)
+                if room.status != "Available":
+                    room.status = "Available"
+                    room.save(ignore_permissions=True)
+        except Exception as e:
+            message = _("Error freeing room status: {0}").format(str(e))
+            frappe.log_error(message)
+            frappe.throw(message)
+
+    def sync_room_status(self):
+        """
+        Central place to mirror stay status transitions to the linked room.
+        """
+        if self.status == "Checked":
+            self.mark_room_as_occupied()
+        elif self.status == "Checked Out":
+            self.mark_room_as_available()

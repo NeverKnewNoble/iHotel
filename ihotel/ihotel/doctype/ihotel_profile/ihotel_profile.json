@@ -1,0 +1,198 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PR-{#####}-{room}",
+ "creation": "2025-11-23 21:27:09.480496",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "room_information_section",
+  "hotel_stay",
+  "column_break_jlcs",
+  "room",
+  "column_break_fvkn",
+  "status",
+  "guest_information_section",
+  "guest",
+  "check_in_date",
+  "column_break_bzuq",
+  "guest_name",
+  "check_out_date",
+  "section_break_lnmk",
+  "room_rate",
+  "section_break_xkkl",
+  "payments",
+  "section_break_yqvd",
+  "outstanding_balance",
+  "column_break_wndg",
+  "total_payments",
+  "column_break_iocx",
+  "total_amount",
+  "notes_tab",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fetch_from": "hotel_stay.room",
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room"
+  },
+  {
+   "fieldname": "room_information_section",
+   "fieldtype": "Section Break",
+   "label": "Room Information"
+  },
+  {
+   "fieldname": "column_break_fvkn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hotel_stay",
+   "fieldtype": "Link",
+   "label": "Hotel Stay",
+   "options": "Hotel Stay"
+  },
+  {
+   "fieldname": "guest_information_section",
+   "fieldtype": "Section Break",
+   "label": "Guest Information"
+  },
+  {
+   "fetch_from": "hotel_stay.guest",
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "label": "Guest",
+   "options": "Guest",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bzuq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "guest.guest_name",
+   "fieldname": "guest_name",
+   "fieldtype": "Data",
+   "label": "Guest Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "hotel_stay.actual_check_in",
+   "fieldname": "check_in_date",
+   "fieldtype": "Datetime",
+   "label": "Check In Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "hotel_stay.actual_check_out",
+   "fieldname": "check_out_date",
+   "fieldtype": "Datetime",
+   "label": "Check Out Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_xkkl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payments",
+   "fieldtype": "Table",
+   "label": "Payments",
+   "options": "Payment Items"
+  },
+  {
+   "fieldname": "section_break_yqvd",
+   "fieldtype": "Section Break",
+   "label": "Financial Summary "
+  },
+  {
+   "default": "0.00",
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Charges"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "outstanding_balance",
+   "fieldtype": "Currency",
+   "label": "Outstanding Balance"
+  },
+  {
+   "fieldname": "column_break_wndg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "total_payments",
+   "fieldtype": "Currency",
+   "label": "Total Payments "
+  },
+  {
+   "fieldname": "column_break_iocx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Open\nSettled\nTransferred"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_jlcs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes_tab",
+   "fieldtype": "Tab Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "section_break_lnmk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "hotel_stay.room_rate",
+   "fieldname": "room_rate",
+   "fieldtype": "Currency",
+   "label": "Room Rate",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-11-24 23:25:35.531783",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "iHotel Profile",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
