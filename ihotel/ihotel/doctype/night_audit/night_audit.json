@@ -6,16 +6,19 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "audit_date",
   "performed_by",
-  "column_break_umnr",
+  "section_break_uhbz",
+  "audit_date",
+  "column_break_rghe",
   "audit_time",
+  "column_break_poej",
+  "total_revenue",
   "section_break_qnuq",
   "total_rooms",
+  "column_break_yngx",
   "occupied_rooms",
   "column_break_sqnr",
   "occupancy_rate",
-  "total_revenue",
   "section_break_dbgv",
   "audit_notes"
  ],
@@ -33,10 +36,6 @@
    "label": "Performed By",
    "options": "User",
    "unique": 1
-  },
-  {
-   "fieldname": "column_break_umnr",
-   "fieldtype": "Column Break"
   },
   {
    "default": "Now",
@@ -69,6 +68,7 @@
    "label": "Occupancy Rate"
   },
   {
+   "default": "0.00",
    "fieldname": "total_revenue",
    "fieldtype": "Currency",
    "label": "Total Revenue"
@@ -81,12 +81,28 @@
    "fieldname": "audit_notes",
    "fieldtype": "Text Editor",
    "label": "Audit Notes"
+  },
+  {
+   "fieldname": "column_break_yngx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_uhbz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_rghe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_poej",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-16 19:52:37.942018",
+ "modified": "2025-11-24 23:31:33.927043",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Night Audit",

@@ -9,6 +9,7 @@ import frappe
 from frappe.model.document import Document
 from frappe import _
 from datetime import datetime, date
+from frappe.utils import nowdate
 
 class NightAudit(Document):
     def validate(self):
@@ -70,74 +71,127 @@ class NightAudit(Document):
         """
         self.run_night_audit()
 
+    def after_insert(self):
+        """
+        Night audit should also run as soon as the document is created.
+        """
+        self.run_night_audit()
+
     def run_night_audit(self):
         """
         Post room charges for all occupied rooms.
         Only processes checked-in stays that are submitted.
         """
-        occupied_stays = frappe.get_all("Hotel Stay", {
-            "status": "Checked",  # Match the status in JSON
-            "docstatus": 1
-        }, fields=["name"])
+        occupied_stays = frappe.get_all(
+            "Hotel Stay",
+            filters={
+                "status": "Checked",  # Match the status in JSON
+                "docstatus": 1
+            },
+            fields=["name"]
+        )
 
         for stay in occupied_stays:
             stay_doc = frappe.get_doc("Hotel Stay", stay.name)
-            self.create_journal_entry(stay_doc)
+            profile_doc = self.ensure_profile_for_stay(stay_doc)
+            self.add_payment_entry(profile_doc, stay_doc)
+            # self.create_journal_entry(stay_doc)
 
-    def create_journal_entry(self, stay_doc):
+    def ensure_profile_for_stay(self, stay_doc):
         """
-        Create journal entry for room revenue.
-        Accounts are fetched from iHotel Settings if available, otherwise uses defaults.
-        Note: Add 'accounts_receivable_account' and 'room_revenue_account' fields to
-        iHotel Settings for customization.
+        Create or fetch an iHotel Profile linked to a stay.
+        Keeps the Hotel Stay.profile field in sync with the profile name.
         """
-        # Get accounts from iHotel Settings if fields exist, otherwise use defaults
-        ar_account = "Accounts Receivable"
-        revenue_account = "Room Revenue"
+        profile_name = stay_doc.profile or frappe.db.get_value(
+            "iHotel Profile", {"hotel_stay": stay_doc.name}, "name"
+        )
 
-        try:
-            settings = frappe.get_single("iHotel Settings")
-            if hasattr(settings, "accounts_receivable_account") and settings.accounts_receivable_account:
-                ar_account = settings.accounts_receivable_account
-            if hasattr(settings, "room_revenue_account") and settings.room_revenue_account:
-                revenue_account = settings.room_revenue_account
-        except Exception:
-            # Settings might not have these fields yet, use defaults
-            pass
+        if profile_name:
+            profile_doc = frappe.get_doc("iHotel Profile", profile_name)
+            if stay_doc.profile != profile_name:
+                # Update link silently to keep modified timestamp untouched
+                stay_doc.db_set("profile", profile_name, update_modified=False)
+            return profile_doc
 
-        company = frappe.defaults.get_user_default("company")
-        if not company:
-            frappe.throw(_("Please set default company in user preferences"))
+        profile_doc = frappe.new_doc("iHotel Profile")
+        profile_doc.hotel_stay = stay_doc.name
+        profile_doc.room = stay_doc.room
+        profile_doc.room_rate = stay_doc.room_rate
+        profile_doc.guest = stay_doc.guest
+        profile_doc.check_in_date = stay_doc.actual_check_in
+        profile_doc.check_out_date = stay_doc.actual_check_out
 
-        # Create journal entry for room revenue
-        journal_entry = frappe.new_doc("Journal Entry")
-        journal_entry.voucher_type = "Journal Entry"
-        journal_entry.posting_date = self.audit_date
-        journal_entry.company = company
-        journal_entry.remark = f"Night audit entry for Hotel Stay: {stay_doc.name}"
+        profile_doc.insert(ignore_permissions=True)
+        stay_doc.db_set("profile", profile_doc.name, update_modified=False)
 
-        # Room revenue debit (AR account)
-        journal_entry.append("accounts", {
-            "account": ar_account,
-            "debit_in_account_currency": stay_doc.room_rate or 0,
-            "credit_in_account_currency": 0,
-            "party_type": "Customer",
-            "party": stay_doc.guest
+        return profile_doc
+
+    def add_payment_entry(self, profile_doc, stay_doc):
+        """
+        Append a nightly room charge into the profile payments table.
+        """
+        profile_doc.append("payments", {
+            "date": nowdate(),
+            "rate": stay_doc.room_rate or 0,
+            "detail": "Room Charge",
+            "payment_status": "Pending payment"
         })
+        profile_doc.save(ignore_permissions=True)
 
-        # Room revenue credit (Revenue account)
-        journal_entry.append("accounts", {
-            "account": revenue_account,
-            "debit_in_account_currency": 0,
-            "credit_in_account_currency": stay_doc.room_rate or 0
-        })
+    # def create_journal_entry(self, stay_doc):
+    #     """
+    #     Create journal entry for room revenue.
+    #     Accounts are fetched from iHotel Settings if available, otherwise uses defaults.
+    #     Note: Add 'accounts_receivable_account' and 'room_revenue_account' fields to
+    #     iHotel Settings for customization.
+    #     """
+    #     # Get accounts from iHotel Settings if fields exist, otherwise use defaults
+    #     ar_account = "Accounts Receivable"
+    #     revenue_account = "Room Revenue"
 
-        try:
-            journal_entry.insert()
-            journal_entry.submit()
-        except Exception as e:
-            frappe.log_error(f"Error creating journal entry for Hotel Stay {stay_doc.name}: {str(e)}")
-            frappe.throw(_("Error creating journal entry: {0}").format(str(e)))
+    #     try:
+    #         settings = frappe.get_single("iHotel Settings")
+    #         if hasattr(settings, "accounts_receivable_account") and settings.accounts_receivable_account:
+    #             ar_account = settings.accounts_receivable_account
+    #         if hasattr(settings, "room_revenue_account") and settings.room_revenue_account:
+    #             revenue_account = settings.room_revenue_account
+    #     except Exception:
+    #         # Settings might not have these fields yet, use defaults
+    #         pass
+
+    #     company = frappe.defaults.get_user_default("company")
+    #     if not company:
+    #         frappe.throw(_("Please set default company in user preferences"))
+
+    #     # Create journal entry for room revenue
+    #     journal_entry = frappe.new_doc("Journal Entry")
+    #     journal_entry.voucher_type = "Journal Entry"
+    #     journal_entry.posting_date = self.audit_date
+    #     journal_entry.company = company
+    #     journal_entry.remark = f"Night audit entry for Hotel Stay: {stay_doc.name}"
+
+    #     # Room revenue debit (AR account)
+    #     journal_entry.append("accounts", {
+    #         "account": ar_account,
+    #         "debit_in_account_currency": stay_doc.room_rate or 0,
+    #         "credit_in_account_currency": 0,
+    #         "party_type": "Customer",
+    #         "party": stay_doc.guest
+    #     })
+
+    #     # Room revenue credit (Revenue account)
+    #     journal_entry.append("accounts", {
+    #         "account": revenue_account,
+    #         "debit_in_account_currency": 0,
+    #         "credit_in_account_currency": stay_doc.room_rate or 0
+    #     })
+
+    #     try:
+    #         journal_entry.insert()
+    #         journal_entry.submit()
+    #     except Exception as e:
+    #         frappe.log_error(f"Error creating journal entry for Hotel Stay {stay_doc.name}: {str(e)}")
+    #         frappe.throw(_("Error creating journal entry: {0}").format(str(e)))
 
     @frappe.whitelist()
     def calculate_metrics(self):

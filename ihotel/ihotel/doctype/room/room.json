@@ -24,6 +24,7 @@
   {
    "fieldname": "room_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Room Type",
    "options": "Room Type"
   },
@@ -36,6 +37,7 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Available\nOccupied\nOut of Order\nHousekeeping"
   },
@@ -56,7 +58,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-13 22:58:52.971919",
+ "modified": "2025-11-24 12:36:28.144010",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Room",
