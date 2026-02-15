@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:room",
+ "autoname": "format:HK-{#####}",
  "creation": "2025-11-13 23:21:15.719491",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -25,7 +25,6 @@
    "in_list_view": 1,
    "label": "Room",
    "options": "Room",
-   "unique": 1
   },
   {
    "default": "Pending",
@@ -87,7 +86,7 @@
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Housekeeping Task",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

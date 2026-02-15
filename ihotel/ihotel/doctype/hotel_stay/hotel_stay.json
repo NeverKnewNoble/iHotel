@@ -18,6 +18,8 @@
   "section_break_rbyp",
   "status",
   "room_rate",
+  "rate_type",
+  "business_source",
   "column_break_vvzc",
   "nights",
   "total_amount",
@@ -99,6 +101,18 @@
    "fieldname": "room_rate",
    "fieldtype": "Currency",
    "label": "Room Rate"
+  },
+  {
+   "fieldname": "rate_type",
+   "fieldtype": "Link",
+   "label": "Rate Type",
+   "options": "Rate Type"
+  },
+  {
+   "fieldname": "business_source",
+   "fieldtype": "Link",
+   "label": "Business Source",
+   "options": "Business Source Category"
   },
   {
    "fieldname": "column_break_vvzc",

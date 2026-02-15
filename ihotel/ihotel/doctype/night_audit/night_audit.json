@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:performed_by",
+ "autoname": "format:NA-{audit_date}-{#####}",
  "creation": "2025-11-13 23:29:34.572886",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -34,8 +34,7 @@
    "fieldname": "performed_by",
    "fieldtype": "Link",
    "label": "Performed By",
-   "options": "User",
-   "unique": 1
+   "options": "User"
   },
   {
    "default": "Now",
@@ -106,7 +105,7 @@
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Night Audit",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

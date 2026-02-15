@@ -1,0 +1,58 @@
+<style>
+	.folio-header { text-align: center; margin-bottom: 20px; }
+	.folio-details table { width: 100%; margin-bottom: 15px; }
+	.folio-details td { padding: 4px 8px; }
+	.folio-details .label { font-weight: bold; width: 40%; }
+	.folio-charges table { width: 100%; border-collapse: collapse; }
+	.folio-charges th, .folio-charges td { border: 1px solid #ddd; padding: 6px 8px; }
+	.folio-charges th { background: #f5f5f5; text-align: left; }
+	.folio-summary { margin-top: 15px; text-align: right; }
+	.folio-summary table { margin-left: auto; }
+	.folio-summary td { padding: 4px 12px; }
+	.folio-summary .total { font-weight: bold; font-size: 14px; }
+</style>
+
+<div class="folio-header">
+	<h2>Guest Folio</h2>
+	<p>{{ doc.name }}</p>
+</div>
+
+<div class="folio-details">
+	<table>
+		<tr><td class="label">Guest:</td><td>{{ doc.guest_name or doc.guest or '' }}</td></tr>
+		<tr><td class="label">Room:</td><td>{{ doc.room or '' }}</td></tr>
+		<tr><td class="label">Hotel Stay:</td><td>{{ doc.hotel_stay or '' }}</td></tr>
+		<tr><td class="label">Check-in:</td><td>{{ frappe.format_value(doc.check_in_date, {"fieldtype": "Datetime"}) }}</td></tr>
+		<tr><td class="label">Check-out:</td><td>{{ frappe.format_value(doc.check_out_date, {"fieldtype": "Datetime"}) }}</td></tr>
+		<tr><td class="label">Room Rate:</td><td>{{ frappe.format_value(doc.room_rate, {"fieldtype": "Currency"}) }}</td></tr>
+	</table>
+</div>
+
+{% if doc.payments %}
+<div class="folio-charges">
+	<h4>Charges & Payments</h4>
+	<table>
+		<thead>
+			<tr><th>Detail</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+		</thead>
+		<tbody>
+			{% for p in doc.payments %}
+			<tr>
+				<td>{{ p.detail or '' }}</td>
+				<td>{{ frappe.format_value(p.date, {"fieldtype": "Date"}) }}</td>
+				<td>{{ frappe.format_value(p.rate, {"fieldtype": "Currency"}) }}</td>
+				<td>{{ p.payment_status or '' }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endif %}
+
+<div class="folio-summary">
+	<table>
+		<tr><td>Total Charges:</td><td>{{ frappe.format_value(doc.total_amount, {"fieldtype": "Currency"}) }}</td></tr>
+		<tr><td>Total Payments:</td><td>{{ frappe.format_value(doc.total_payments, {"fieldtype": "Currency"}) }}</td></tr>
+		<tr class="total"><td>Outstanding Balance:</td><td>{{ frappe.format_value(doc.outstanding_balance, {"fieldtype": "Currency"}) }}</td></tr>
+	</table>
+</div>

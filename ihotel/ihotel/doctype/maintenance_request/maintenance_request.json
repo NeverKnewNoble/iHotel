@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:room",
+ "autoname": "format:MR-{#####}",
  "creation": "2025-11-13 23:24:56.504845",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -26,8 +26,7 @@
    "fieldname": "room",
    "fieldtype": "Link",
    "label": "Room",
-   "options": "Room",
-   "unique": 1
+   "options": "Room"
   },
   {
    "fieldname": "status",
@@ -106,7 +105,7 @@
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Maintenance Request",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2026-02-11 15:50:28.592973",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "",
+ "idx": 2,
+ "modified": "2026-02-11 16:54:14.078738",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "my-dashboard",
+ "owner": "Administrator",
+ "page_name": "my-dashboard",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 1,
+ "title": "Dashboard"
+}

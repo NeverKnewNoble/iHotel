@@ -1,0 +1,645 @@
+/* =============================================
+   iHotel Dashboard — Theme-Aware Styles
+   ============================================= */
+
+/* ---------- CSS Variables ---------- */
+.ihotel-dash {
+    --ih-primary: #3b82f6;
+    --ih-primary-light: #dbeafe;
+    --ih-primary-dark: #1e40af;
+    --ih-green: #10b981;
+    --ih-green-light: #d1fae5;
+    --ih-teal: #14b8a6;
+    --ih-teal-light: #ccfbf1;
+    --ih-amber: #f59e0b;
+    --ih-amber-light: #fef3c7;
+    --ih-red: #ef4444;
+    --ih-red-light: #fee2e2;
+    --ih-purple: #8b5cf6;
+    --ih-purple-light: #ede9fe;
+    --ih-indigo: #6366f1;
+
+    --ih-bg: var(--bg-color, #f9fafb);
+    --ih-card: var(--card-bg, #ffffff);
+    --ih-text: var(--text-color, #111827);
+    --ih-text-muted: var(--text-muted, #6b7280);
+    --ih-border: var(--border-color, #e5e7eb);
+    --ih-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --ih-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --ih-radius: 12px;
+    --ih-radius-sm: 8px;
+}
+
+/* ---------- Dark Mode ---------- */
+[data-theme="dark"] .ihotel-dash,
+.dark .ihotel-dash {
+    --ih-bg: var(--bg-color, #1a1a2e);
+    --ih-card: var(--card-bg, #16213e);
+    --ih-text: var(--text-color, #e5e7eb);
+    --ih-text-muted: var(--text-muted, #9ca3af);
+    --ih-border: var(--border-color, #374151);
+    --ih-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --ih-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
+
+    --ih-primary-light: rgba(59, 130, 246, 0.15);
+    --ih-green-light: rgba(16, 185, 129, 0.15);
+    --ih-teal-light: rgba(20, 184, 166, 0.15);
+    --ih-amber-light: rgba(245, 158, 11, 0.15);
+    --ih-red-light: rgba(239, 68, 68, 0.15);
+    --ih-purple-light: rgba(139, 92, 246, 0.15);
+}
+
+/* ---------- Container ---------- */
+.ihotel-dash {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ---------- Header ---------- */
+.ih-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.ih-header-left h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ih-text);
+    margin: 0 0 2px 0;
+}
+
+.ih-header-left .ih-date {
+    font-size: 13px;
+    color: var(--ih-text-muted);
+}
+
+.ih-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--ih-radius-sm);
+    border: 1px solid var(--ih-border);
+    background: var(--ih-card);
+    color: var(--ih-primary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ih-refresh-btn:hover {
+    background: var(--ih-primary);
+    color: #fff;
+    border-color: var(--ih-primary);
+}
+
+.ih-refresh-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.ih-refresh-btn.spinning svg {
+    animation: ih-spin 0.8s linear infinite;
+}
+
+@keyframes ih-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Date Filter ---------- */
+.ih-date-filter {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 14px 20px;
+    background: var(--ih-card);
+    border: 1px solid var(--ih-border);
+    border-radius: var(--ih-radius);
+    box-shadow: var(--ih-shadow);
+    flex-wrap: wrap;
+}
+
+.ih-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ih-filter-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ih-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ih-date-input {
+    padding: 7px 12px;
+    border: 1px solid var(--ih-border);
+    border-radius: var(--ih-radius-sm);
+    background: var(--ih-bg);
+    color: var(--ih-text);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-width: 160px;
+}
+
+.ih-date-input:focus {
+    border-color: var(--ih-primary);
+    box-shadow: 0 0 0 3px var(--ih-primary-light);
+}
+
+.ih-filter-btn {
+    padding: 7px 16px !important;
+    border-radius: var(--ih-radius-sm) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all 0.2s !important;
+    border: 1px solid var(--ih-border) !important;
+    background: var(--ih-card) !important;
+    color: var(--ih-text) !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+}
+
+.ih-filter-btn[data-action="apply-filter"] {
+    background: var(--ih-primary) !important;
+    border-color: var(--ih-primary) !important;
+    color: #fff !important;
+}
+
+.ih-filter-btn[data-action="apply-filter"]:hover {
+    background: var(--ih-primary-dark) !important;
+    border-color: var(--ih-primary-dark) !important;
+}
+
+.ih-filter-btn[data-action="clear-filter"]:hover {
+    background: var(--ih-bg) !important;
+}
+
+@media (max-width: 768px) {
+    .ih-date-filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ih-date-input {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .ih-filter-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ---------- KPI Cards ---------- */
+.ih-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.ih-kpi-card {
+    background: var(--ih-card);
+    border-radius: var(--ih-radius);
+    padding: 20px;
+    box-shadow: var(--ih-shadow);
+    border: 1px solid var(--ih-border);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.ih-kpi-card:hover {
+    box-shadow: var(--ih-shadow-md);
+    transform: translateY(-2px);
+}
+
+.ih-kpi-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ih-kpi-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.ih-kpi-icon.blue { background: var(--ih-primary-light); color: var(--ih-primary); }
+.ih-kpi-icon.green { background: var(--ih-green-light); color: var(--ih-green); }
+.ih-kpi-icon.teal { background: var(--ih-teal-light); color: var(--ih-teal); }
+.ih-kpi-icon.amber { background: var(--ih-amber-light); color: var(--ih-amber); }
+
+.ih-kpi-icon svg { stroke: currentColor; fill: none; }
+
+.ih-kpi-content { flex: 1; min-width: 0; }
+
+.ih-kpi-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ih-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.ih-kpi-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ih-text);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ih-kpi-sub {
+    font-size: 12px;
+    color: var(--ih-text-muted);
+    margin-top: 4px;
+}
+
+/* ---------- Section Grid (2-col) ---------- */
+.ih-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.ih-section-full {
+    margin-bottom: 24px;
+}
+
+/* ---------- Card (generic) ---------- */
+.ih-card {
+    background: var(--ih-card);
+    border-radius: var(--ih-radius);
+    box-shadow: var(--ih-shadow);
+    border: 1px solid var(--ih-border);
+    overflow: hidden;
+}
+
+.ih-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--ih-border);
+}
+
+.ih-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ih-text);
+    margin: 0;
+}
+
+.ih-card-link {
+    font-size: 12px;
+    color: var(--ih-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.ih-card-link:hover {
+    text-decoration: underline;
+}
+
+.ih-card-body {
+    padding: 16px 20px;
+}
+
+/* ---------- Room Status Chart Area ---------- */
+.ih-chart-container {
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- Status Bar (mini horizontal bars) ---------- */
+.ih-status-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ih-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ih-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.ih-status-dot.available { background: var(--ih-green); }
+.ih-status-dot.occupied { background: var(--ih-primary); }
+.ih-status-dot.housekeeping { background: var(--ih-amber); }
+.ih-status-dot.out-of-order { background: var(--ih-red); }
+
+.ih-status-label {
+    font-size: 13px;
+    color: var(--ih-text);
+    flex: 1;
+    min-width: 0;
+}
+
+.ih-status-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ih-text);
+    min-width: 28px;
+    text-align: right;
+}
+
+.ih-status-bar-track {
+    width: 80px;
+    height: 6px;
+    background: var(--ih-border);
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.ih-status-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.ih-status-bar-fill.available { background: var(--ih-green); }
+.ih-status-bar-fill.occupied { background: var(--ih-primary); }
+.ih-status-bar-fill.housekeeping { background: var(--ih-amber); }
+.ih-status-bar-fill.out-of-order { background: var(--ih-red); }
+
+/* ---------- Tables ---------- */
+.ih-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ih-table th {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ih-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--ih-border);
+}
+
+.ih-table td {
+    font-size: 13px;
+    color: var(--ih-text);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--ih-border);
+    vertical-align: middle;
+}
+
+.ih-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.ih-table tbody tr:hover {
+    background: var(--ih-primary-light);
+}
+
+.ih-table a {
+    color: var(--ih-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.ih-table a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Status Badges ---------- */
+.ih-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+.ih-badge.reserved {
+    background: var(--ih-amber-light);
+    color: #92400e;
+}
+
+.ih-badge.checked {
+    background: var(--ih-green-light);
+    color: #065f46;
+}
+
+[data-theme="dark"] .ih-badge.reserved,
+.dark .ih-badge.reserved {
+    color: var(--ih-amber);
+}
+
+[data-theme="dark"] .ih-badge.checked,
+.dark .ih-badge.checked {
+    color: var(--ih-green);
+}
+
+/* ---------- Operations Summary ---------- */
+.ih-ops-section {
+    margin-bottom: 20px;
+}
+
+.ih-ops-section:last-child {
+    margin-bottom: 0;
+}
+
+.ih-ops-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ih-text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ih-ops-title svg {
+    width: 16px;
+    height: 16px;
+}
+
+.ih-ops-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ih-ops-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: var(--ih-radius-sm);
+    background: var(--ih-bg);
+}
+
+.ih-ops-item-label {
+    font-size: 13px;
+    color: var(--ih-text);
+}
+
+.ih-ops-item-count {
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 28px;
+    text-align: center;
+    padding: 2px 10px;
+    border-radius: 9999px;
+}
+
+.ih-ops-item-count.pending {
+    background: var(--ih-amber-light);
+    color: #92400e;
+}
+
+.ih-ops-item-count.in-progress {
+    background: var(--ih-primary-light);
+    color: var(--ih-primary-dark);
+}
+
+.ih-ops-item-count.completed {
+    background: var(--ih-green-light);
+    color: #065f46;
+}
+
+.ih-ops-item-count.open {
+    background: var(--ih-red-light);
+    color: #991b1b;
+}
+
+.ih-ops-item-count.resolved {
+    background: var(--ih-teal-light);
+    color: #115e59;
+}
+
+.ih-ops-item-count.closed {
+    background: var(--ih-border);
+    color: var(--ih-text-muted);
+}
+
+[data-theme="dark"] .ih-ops-item-count.pending,
+.dark .ih-ops-item-count.pending { color: var(--ih-amber); }
+
+[data-theme="dark"] .ih-ops-item-count.in-progress,
+.dark .ih-ops-item-count.in-progress { color: var(--ih-primary); }
+
+[data-theme="dark"] .ih-ops-item-count.completed,
+.dark .ih-ops-item-count.completed { color: var(--ih-green); }
+
+[data-theme="dark"] .ih-ops-item-count.open,
+.dark .ih-ops-item-count.open { color: var(--ih-red); }
+
+[data-theme="dark"] .ih-ops-item-count.resolved,
+.dark .ih-ops-item-count.resolved { color: var(--ih-teal); }
+
+/* Critical alert banner */
+.ih-critical {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: var(--ih-radius-sm);
+    background: var(--ih-red-light);
+    border: 1px solid var(--ih-red);
+    margin-top: 10px;
+}
+
+.ih-critical svg {
+    width: 16px;
+    height: 16px;
+    color: var(--ih-red);
+    stroke: currentColor;
+    fill: none;
+    flex-shrink: 0;
+}
+
+.ih-critical span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ih-red);
+}
+
+/* ---------- Empty State ---------- */
+.ih-empty {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--ih-text-muted);
+    font-size: 13px;
+}
+
+/* ---------- Loading ---------- */
+.ih-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--ih-text-muted);
+    font-size: 14px;
+    gap: 10px;
+}
+
+.ih-loading svg {
+    width: 20px;
+    height: 20px;
+    animation: ih-spin 1s linear infinite;
+    stroke: var(--ih-primary);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+    .ih-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .ih-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ih-section-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ih-kpi-value {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,59 @@
+<style>
+	.receipt-header { text-align: center; margin-bottom: 20px; }
+	.receipt-header h2 { margin: 0; }
+	.receipt-details { margin-bottom: 15px; }
+	.receipt-details table { width: 100%; }
+	.receipt-details td { padding: 4px 8px; }
+	.receipt-details .label { font-weight: bold; width: 40%; }
+	.receipt-services { margin-top: 15px; }
+	.receipt-services table { width: 100%; border-collapse: collapse; }
+	.receipt-services th, .receipt-services td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+	.receipt-services th { background: #f5f5f5; }
+	.receipt-total { text-align: right; margin-top: 15px; font-size: 16px; font-weight: bold; }
+	.receipt-footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; }
+</style>
+
+<div class="receipt-header">
+	<h2>Hotel Stay Receipt</h2>
+	<p>{{ doc.name }}</p>
+</div>
+
+<div class="receipt-details">
+	<table>
+		<tr><td class="label">Guest:</td><td>{{ doc.guest or '' }}</td></tr>
+		<tr><td class="label">Room:</td><td>{{ doc.room or '' }} ({{ doc.room_type or '' }})</td></tr>
+		<tr><td class="label">Check-in:</td><td>{{ frappe.format_value(doc.actual_check_in or doc.expected_check_in, {"fieldtype": "Datetime"}) }}</td></tr>
+		<tr><td class="label">Check-out:</td><td>{{ frappe.format_value(doc.actual_check_out or doc.expected_check_out, {"fieldtype": "Datetime"}) }}</td></tr>
+		<tr><td class="label">Nights:</td><td>{{ doc.nights or 0 }}</td></tr>
+		<tr><td class="label">Room Rate:</td><td>{{ frappe.format_value(doc.room_rate, {"fieldtype": "Currency"}) }}</td></tr>
+	</table>
+</div>
+
+{% if doc.additional_services %}
+<div class="receipt-services">
+	<h4>Additional Services</h4>
+	<table>
+		<thead>
+			<tr><th>Service</th><th>Qty</th><th>Rate</th><th>Amount</th></tr>
+		</thead>
+		<tbody>
+			{% for s in doc.additional_services %}
+			<tr>
+				<td>{{ s.service_type or '' }}</td>
+				<td>{{ s.quantity or 0 }}</td>
+				<td>{{ frappe.format_value(s.rate, {"fieldtype": "Currency"}) }}</td>
+				<td>{{ frappe.format_value(s.amount, {"fieldtype": "Currency"}) }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endif %}
+
+<div class="receipt-total">
+	Total: {{ frappe.format_value(doc.total_amount, {"fieldtype": "Currency"}) }}
+</div>
+
+<div class="receipt-footer">
+	<p>Thank you for staying with us!</p>
+</div>

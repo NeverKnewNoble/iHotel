@@ -20,6 +20,7 @@ class HotelStay(Document):
         """
         self.validate_dates()
         self.validate_room_availability()
+        self.validate_rate_type()
         self.calculate_total_amount()
         self.calculate_additional_services_amount()
         self.validate_additional_services()
@@ -60,6 +61,22 @@ class HotelStay(Document):
                 frappe.throw(_("Room is not available for the selected dates. "
                              "There is an overlapping reservation: {0}").format(
                              overlapping_stays[0].name))
+
+    def validate_rate_type(self):
+        if self.rate_type and self.nights:
+            rate_type = frappe.get_cached_doc("Rate Type", self.rate_type)
+            if rate_type.minimum_stay_nights and self.nights < rate_type.minimum_stay_nights:
+                frappe.throw(
+                    _("Minimum stay for rate type {0} is {1} nights").format(
+                        self.rate_type, rate_type.minimum_stay_nights
+                    )
+                )
+            if rate_type.maximum_stay_nights and self.nights > rate_type.maximum_stay_nights:
+                frappe.throw(
+                    _("Maximum stay for rate type {0} is {1} nights").format(
+                        self.rate_type, rate_type.maximum_stay_nights
+                    )
+                )
 
     def calculate_total_amount(self):
         """

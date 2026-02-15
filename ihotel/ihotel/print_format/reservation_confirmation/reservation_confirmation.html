@@ -1,0 +1,56 @@
+<style>
+	.conf-header { text-align: center; margin-bottom: 20px; }
+	.conf-header h2 { margin: 0; }
+	.conf-details table { width: 100%; }
+	.conf-details td { padding: 4px 8px; }
+	.conf-details .label { font-weight: bold; width: 40%; }
+	.conf-section { margin-top: 20px; }
+	.conf-footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; }
+</style>
+
+<div class="conf-header">
+	<h2>Reservation Confirmation</h2>
+	<p>Confirmation #: {{ doc.name }}</p>
+</div>
+
+<div class="conf-details">
+	<h4>Guest Information</h4>
+	<table>
+		<tr><td class="label">Name:</td><td>{{ doc.full_name or '' }}</td></tr>
+		<tr><td class="label">Company:</td><td>{{ doc.company or '' }}</td></tr>
+		<tr><td class="label">Email:</td><td>{{ doc.email_address or '' }}</td></tr>
+		<tr><td class="label">Phone:</td><td>{{ doc.phone_number or '' }}</td></tr>
+	</table>
+</div>
+
+<div class="conf-section conf-details">
+	<h4>Stay Details</h4>
+	<table>
+		<tr><td class="label">Check-in Date:</td><td>{{ frappe.format_value(doc.check_in_date, {"fieldtype": "Date"}) }}</td></tr>
+		<tr><td class="label">Check-in Time:</td><td>{{ doc.check_in_time or '14:00' }}</td></tr>
+		<tr><td class="label">Check-out Date:</td><td>{{ frappe.format_value(doc.check_out_date, {"fieldtype": "Date"}) }}</td></tr>
+		<tr><td class="label">Check-out Time:</td><td>{{ doc.check_out_time or '11:00' }}</td></tr>
+		<tr><td class="label">Duration:</td><td>{{ doc.days or 0 }} night(s)</td></tr>
+		<tr><td class="label">Room Type:</td><td>{{ doc.room_type or '' }}</td></tr>
+		{% if doc.room %}
+		<tr><td class="label">Room:</td><td>{{ doc.room }}</td></tr>
+		{% endif %}
+		<tr><td class="label">Guests:</td><td>{{ doc.no_of_guests or 1 }}</td></tr>
+	</table>
+</div>
+
+<div class="conf-section conf-details">
+	<h4>Rate Information</h4>
+	<table>
+		{% if doc.rate_type %}
+		<tr><td class="label">Rate Type:</td><td>{{ doc.rate_type }}</td></tr>
+		{% endif %}
+		<tr><td class="label">Rate per Night:</td><td>{{ frappe.format_value(doc.rent, {"fieldtype": "Currency"}) }}</td></tr>
+		<tr><td class="label">Total:</td><td>{{ frappe.format_value(doc.total_rent, {"fieldtype": "Currency"}) }}</td></tr>
+	</table>
+</div>
+
+<div class="conf-footer">
+	<p>Status: <strong>{{ doc.status or '' }}</strong></p>
+	<p>Thank you for your reservation. We look forward to welcoming you!</p>
+</div>

@@ -1,0 +1,338 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-12 07:44:43.024107",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "stay_and_rent_details_tab",
+  "check_in_date",
+  "check_out_date",
+  "column_break_quex",
+  "check_in_time",
+  "check_out_time",
+  "column_break_nzjo",
+  "days",
+  "business_source_category",
+  "stay_details_section",
+  "building",
+  "room",
+  "column_break_bxqg",
+  "floor",
+  "room_type",
+  "column_break_zizh",
+  "no_of_guests",
+  "status",
+  "rate_details_section",
+  "rate_type",
+  "section_break_hxvt",
+  "rent",
+  "total_rent",
+  "discount",
+  "other_charges",
+  "column_break_lvby",
+  "tax",
+  "total_rental",
+  "deposit",
+  "total_charges",
+  "guest_details_tab",
+  "customer",
+  "personal_details_section",
+  "full_name",
+  "column_break_hzor",
+  "date_of_birth",
+  "column_break_kshj",
+  "company",
+  "contact_details_section",
+  "email_address",
+  "city",
+  "column_break_gcyq",
+  "phone_number",
+  "state",
+  "column_break_ulel",
+  "country",
+  "postal_code",
+  "conversion_section",
+  "hotel_stay",
+  "group_reservation"
+ ],
+ "fields": [
+  {
+   "fieldname": "stay_and_rent_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Stay And Rent Details"
+  },
+  {
+   "fieldname": "check_in_date",
+   "fieldtype": "Date",
+   "label": "Check In Date"
+  },
+  {
+   "fieldname": "guest_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Guest Details"
+  },
+  {
+   "fieldname": "check_out_date",
+   "fieldtype": "Date",
+   "label": "Check Out Date"
+  },
+  {
+   "fieldname": "column_break_quex",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Time",
+   "label": "Check In Time"
+  },
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Time",
+   "label": "Check Out Time"
+  },
+  {
+   "fieldname": "column_break_nzjo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "days",
+   "fieldtype": "Int",
+   "label": "Days"
+  },
+  {
+   "fieldname": "business_source_category",
+   "fieldtype": "Link",
+   "label": "Business Source Category",
+   "options": "Business Source Category"
+  },
+  {
+   "fieldname": "stay_details_section",
+   "fieldtype": "Section Break",
+   "label": "Stay Details"
+  },
+  {
+   "fieldname": "building",
+   "fieldtype": "Data",
+   "label": "Building"
+  },
+  {
+   "fieldname": "floor",
+   "fieldtype": "Data",
+   "label": "Floor "
+  },
+  {
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "label": "Room Type",
+   "options": "Room Type"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room"
+  },
+  {
+   "fieldname": "no_of_guests",
+   "fieldtype": "Int",
+   "label": "No. of Guests"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "pending\nconfirmed\ncancelled"
+  },
+  {
+   "fieldname": "column_break_bxqg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zizh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rate_details_section",
+   "fieldtype": "Section Break",
+   "label": "Rate Details"
+  },
+  {
+   "fieldname": "rate_type",
+   "fieldtype": "Link",
+   "label": "Rate Type",
+   "options": "Rate Type"
+  },
+  {
+   "fieldname": "section_break_hxvt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rent",
+   "fieldtype": "Currency",
+   "label": "Rent"
+  },
+  {
+   "fieldname": "total_rent",
+   "fieldtype": "Currency",
+   "label": "Total Rent"
+  },
+  {
+   "fieldname": "column_break_lvby",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tax",
+   "fieldtype": "Currency",
+   "label": "Tax"
+  },
+  {
+   "fieldname": "total_rental",
+   "fieldtype": "Currency",
+   "label": "Total Rental"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Currency",
+   "label": "Discount"
+  },
+  {
+   "fieldname": "other_charges",
+   "fieldtype": "Currency",
+   "label": "Other Charges"
+  },
+  {
+   "fieldname": "deposit",
+   "fieldtype": "Currency",
+   "label": "Deposit"
+  },
+  {
+   "fieldname": "total_charges",
+   "fieldtype": "Currency",
+   "label": "Total Charges"
+  },
+  {
+   "fieldname": "personal_details_section",
+   "fieldtype": "Section Break",
+   "label": "Personal Details"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
+  },
+  {
+   "fieldname": "column_break_hzor",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date Of Birth "
+  },
+  {
+   "fieldname": "column_break_kshj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "contact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "email_address",
+   "fieldtype": "Data",
+   "label": "Email Address"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "column_break_gcyq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Phone",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "column_break_ulel",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "conversion_section",
+   "fieldtype": "Section Break",
+   "label": "Conversion"
+  },
+  {
+   "fieldname": "hotel_stay",
+   "fieldtype": "Link",
+   "label": "Hotel Stay",
+   "options": "Hotel Stay",
+   "read_only": 1
+  },
+  {
+   "fieldname": "group_reservation",
+   "fieldtype": "Link",
+   "label": "Group Reservation",
+   "options": "Group Reservation"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-13 13:08:59.738867",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "Reservation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

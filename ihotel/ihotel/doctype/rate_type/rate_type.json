@@ -1,0 +1,176 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-13 12:57:14.595868",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "rate_type_name",
+  "rate_code",
+  "description",
+  "column_break_pxes",
+  "is_active",
+  "pricing_behavior_section",
+  "pricing_method",
+  "applicable_to",
+  "rules_and_conditions_tab",
+  "minimum_stay_nights",
+  "refundable",
+  "includes_breakfast",
+  "column_break_myyk",
+  "maximum_stay_nights",
+  "includes_taxes",
+  "allow_discount",
+  "visibility_tab",
+  "available_for_online_booking",
+  "column_break_nqih",
+  "available_for_corporate",
+  "column_break_szhw",
+  "internal_use_only"
+ ],
+ "fields": [
+  {
+   "fieldname": "rate_type_name",
+   "fieldtype": "Data",
+   "label": "Rate Type Name"
+  },
+  {
+   "fieldname": "rate_code",
+   "fieldtype": "Data",
+   "label": "Rate Code"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_pxes",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "pricing_behavior_section",
+   "fieldtype": "Section Break",
+   "label": "Pricing Behavior"
+  },
+  {
+   "fieldname": "pricing_method",
+   "fieldtype": "Select",
+   "label": "Pricing Method",
+   "options": "Per Night\nPer Person\nPer Room\nPackage Rate"
+  },
+  {
+   "fieldname": "applicable_to",
+   "fieldtype": "Select",
+   "label": "Applicable To",
+   "options": "Room Type\nSpecific Room\nAll Rooms"
+  },
+  {
+   "fieldname": "rules_and_conditions_tab",
+   "fieldtype": "Tab Break",
+   "label": "Rules And Conditions"
+  },
+  {
+   "fieldname": "minimum_stay_nights",
+   "fieldtype": "Int",
+   "label": "Minimum Stay (Nights)"
+  },
+  {
+   "default": "0",
+   "fieldname": "refundable",
+   "fieldtype": "Check",
+   "label": "Refundable"
+  },
+  {
+   "default": "0",
+   "fieldname": "includes_breakfast",
+   "fieldtype": "Check",
+   "label": "Includes Breakfast"
+  },
+  {
+   "fieldname": "column_break_myyk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maximum_stay_nights",
+   "fieldtype": "Int",
+   "label": "Maximum Stay (Nights)"
+  },
+  {
+   "default": "0",
+   "fieldname": "includes_taxes",
+   "fieldtype": "Check",
+   "label": "Includes Taxes"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_discount",
+   "fieldtype": "Check",
+   "label": "Allow Discount"
+  },
+  {
+   "fieldname": "visibility_tab",
+   "fieldtype": "Tab Break",
+   "label": "Visibility"
+  },
+  {
+   "default": "0",
+   "fieldname": "available_for_online_booking",
+   "fieldtype": "Check",
+   "label": "Available for Online Booking"
+  },
+  {
+   "fieldname": "column_break_nqih",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "available_for_corporate",
+   "fieldtype": "Check",
+   "label": "Available for Corporate"
+  },
+  {
+   "fieldname": "column_break_szhw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "internal_use_only",
+   "fieldtype": "Check",
+   "label": "Internal Use Only"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-13 13:07:56.400690",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "Rate Type",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

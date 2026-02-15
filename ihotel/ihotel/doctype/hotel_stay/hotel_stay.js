@@ -95,6 +95,22 @@ frappe.ui.form.on("Hotel Stay", {
 		}
 	},
 
+	rate_type(frm) {
+		if (frm.doc.rate_type) {
+			frappe.db.get_doc("Rate Type", frm.doc.rate_type).then((rate) => {
+				let indicators = [];
+				if (rate.includes_breakfast) indicators.push("Breakfast included");
+				if (rate.refundable) indicators.push("Refundable");
+				if (rate.includes_taxes) indicators.push("Taxes included");
+				if (indicators.length) {
+					frm.set_intro(indicators.join(" | "), "blue");
+				}
+			});
+		} else {
+			frm.set_intro("");
+		}
+	},
+
 	calculate_total(frm) {
 		if (frm.doc.expected_check_in && frm.doc.expected_check_out && frm.doc.room_rate) {
 			const nights = frappe.datetime.get_day_diff(

@@ -5,21 +5,29 @@ app_description = "hotel manangement app"
 app_email = "nortexnoble@gmail.com"
 app_license = "mit"
 
+# Fixtures
+# ------------------
+fixtures = [
+    {"dt": "Workspace Sidebar", "filters": [["app", "=", "ihotel"]]},
+]
+
 # Apps
 # ------------------
 
 # required_apps = []
+# add_to_apps_screen = ["iHotel"]
+
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "ihotel",
-# 		"logo": "/assets/ihotel/logo.png",
-# 		"title": "iHotel",
-# 		"route": "/ihotel",
-# 		"has_permission": "ihotel.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "ihotel",
+		"logo": "/assets/ihotel/logo.png",
+		"title": "iHotel",
+		"route": "/ihotel",
+		# "has_permission": "ihotel.api.permission.has_app_permission"
+	}
+]
 
 # app_include_icons = [
 #     "ihotel/public/icons/my_custom_icons.svg"
@@ -137,38 +145,35 @@ app_license = "mit"
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
-# Document Events
-# ---------------
-# Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+# Additional Document Events (see doc_events in Scheduled Tasks section above)
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"ihotel.tasks.all"
-# 	],
-# 	"daily": [
-# 		"ihotel.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"ihotel.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"ihotel.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"ihotel.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"hourly": [
+		"ihotel.tasks.late_checkout_alert",
+	],
+	"daily": [
+		"ihotel.tasks.auto_no_show",
+		"ihotel.tasks.auto_generate_housekeeping",
+	],
+	"cron": {
+		"0 23 * * *": [
+			"ihotel.tasks.night_audit_reminder",
+		],
+	},
+}
+
+# Document Events
+doc_events = {
+	"Hotel Stay": {
+		"on_update_after_submit": "ihotel.notifications.on_hotel_stay_update",
+	},
+	"Reservation": {
+		"on_update": "ihotel.notifications.on_reservation_update",
+	},
+}
 
 # Testing
 # -------

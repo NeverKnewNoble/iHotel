@@ -5,14 +5,17 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "hotel_information_tab",
   "hotel_name",
   "section_break_troq",
   "email",
-  "total_rooms",
   "column_break_kjka",
   "contact_number",
+  "column_break_qvhz",
+  "total_rooms",
   "section_break_couq",
   "address",
+  "check_in_defaults_tab",
   "section_break_djqb",
   "default_check_in_time",
   "column_break_ympd",
@@ -75,13 +78,27 @@
    "fieldname": "total_rooms",
    "fieldtype": "Int",
    "label": "Total Rooms"
+  },
+  {
+   "fieldname": "hotel_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Hotel Information"
+  },
+  {
+   "fieldname": "column_break_qvhz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "check_in_defaults_tab",
+   "fieldtype": "Tab Break",
+   "label": "Guest Stay Defaults"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-11-16 17:34:00.850742",
+ "modified": "2026-02-12 07:27:17.309219",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "iHotel Settings",
