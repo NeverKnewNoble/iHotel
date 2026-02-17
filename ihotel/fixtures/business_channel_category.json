@@ -1,0 +1,34 @@
+[
+ {
+  "channel_category": "Online",
+  "docstatus": 0,
+  "doctype": "Business Channel Category",
+  "modified": "2026-02-17 16:11:43.587570",
+  "module": "iHotel",
+  "name": "Online"
+ },
+ {
+  "channel_category": "Offline",
+  "docstatus": 0,
+  "doctype": "Business Channel Category",
+  "modified": "2026-02-17 16:11:58.212923",
+  "module": "iHotel",
+  "name": "Offline"
+ },
+ {
+  "channel_category": "Partner",
+  "docstatus": 0,
+  "doctype": "Business Channel Category",
+  "modified": "2026-02-17 16:12:13.828793",
+  "module": "iHotel",
+  "name": "Partner"
+ },
+ {
+  "channel_category": "Internal",
+  "docstatus": 0,
+  "doctype": "Business Channel Category",
+  "modified": "2026-02-17 16:12:53.011136",
+  "module": "iHotel",
+  "name": "Internal"
+ }
+]

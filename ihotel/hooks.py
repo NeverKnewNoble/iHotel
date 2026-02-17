@@ -9,6 +9,8 @@ app_license = "mit"
 # ------------------
 fixtures = [
     {"dt": "Workspace Sidebar", "filters": [["app", "=", "ihotel"]]},
+	{"doctype": "Business Source Type", "filters": [["module" , "in" , ("ihotel" )]]},
+	{"doctype": "Business Channel Category", "filters": [["module" , "in" , ("ihotel" )]]},
 ]
 
 # Apps

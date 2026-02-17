@@ -15,11 +15,11 @@
   "days",
   "business_source_category",
   "stay_details_section",
-  "building",
   "room",
+  "building",
   "column_break_bxqg",
-  "floor",
   "room_type",
+  "floor",
   "column_break_zizh",
   "no_of_guests",
   "status",
@@ -51,10 +51,7 @@
   "state",
   "column_break_ulel",
   "country",
-  "postal_code",
-  "conversion_section",
-  "hotel_stay",
-  "group_reservation"
+  "postal_code"
  ],
  "fields": [
   {
@@ -112,11 +109,13 @@
    "label": "Stay Details"
   },
   {
+   "fetch_from": "room.building",
    "fieldname": "building",
    "fieldtype": "Data",
    "label": "Building"
   },
   {
+   "fetch_from": "room.floor",
    "fieldname": "floor",
    "fieldtype": "Data",
    "label": "Floor "
@@ -288,30 +287,12 @@
    "fieldtype": "Link",
    "label": "Customer",
    "options": "Customer"
-  },
-  {
-   "fieldname": "conversion_section",
-   "fieldtype": "Section Break",
-   "label": "Conversion"
-  },
-  {
-   "fieldname": "hotel_stay",
-   "fieldtype": "Link",
-   "label": "Hotel Stay",
-   "options": "Hotel Stay",
-   "read_only": 1
-  },
-  {
-   "fieldname": "group_reservation",
-   "fieldtype": "Link",
-   "label": "Group Reservation",
-   "options": "Group Reservation"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-13 13:08:59.738867",
+ "modified": "2026-02-17 15:02:32.283685",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Reservation",

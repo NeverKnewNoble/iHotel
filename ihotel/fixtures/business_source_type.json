@@ -1,0 +1,58 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:41:02.717989",
+  "module": "iHotel",
+  "name": "Online OTA",
+  "source_type": "Online OTA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:41:23.936461",
+  "module": "iHotel",
+  "name": "Travel Agent",
+  "source_type": "Travel Agent"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:41:37.003780",
+  "module": "iHotel",
+  "name": "Corporate",
+  "source_type": "Corporate"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:41:49.173050",
+  "module": "iHotel",
+  "name": "Direct",
+  "source_type": "Direct"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:42:01.761173",
+  "module": "iHotel",
+  "name": "Walk-in",
+  "source_type": "Walk-in"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:42:13.475868",
+  "module": "iHotel",
+  "name": "Referral",
+  "source_type": "Referral"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Business Source Type",
+  "modified": "2026-02-17 15:42:27.190963",
+  "module": "iHotel",
+  "name": "Event",
+  "source_type": "Event"
+ }
+]

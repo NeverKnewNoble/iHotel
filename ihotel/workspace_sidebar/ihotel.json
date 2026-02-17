@@ -80,6 +80,18 @@
   {
    "child": 1,
    "collapsible": 1,
+   "icon": "person-standing",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Profile",
+   "link_to": "iHotel Profile",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
    "icon": "settings",
    "indent": 0,
    "keep_closed": 0,
@@ -313,7 +325,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-02-15 00:41:40.609056",
+ "modified": "2026-02-17 16:15:09.391202",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "iHotel",

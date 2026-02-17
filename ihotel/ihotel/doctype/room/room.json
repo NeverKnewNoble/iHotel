@@ -8,6 +8,7 @@
  "field_order": [
   "room_number",
   "floor",
+  "building",
   "column_break_fidn",
   "room_type",
   "status",
@@ -53,12 +54,17 @@
    "fieldname": "maintenance_notes",
    "fieldtype": "Text",
    "label": "Maintenance Notes"
+  },
+  {
+   "fieldname": "building",
+   "fieldtype": "Data",
+   "label": "Building"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-24 12:36:28.144010",
+ "modified": "2026-02-17 15:02:05.064411",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Room",

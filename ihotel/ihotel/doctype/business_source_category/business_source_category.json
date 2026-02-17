@@ -66,9 +66,9 @@
   },
   {
    "fieldname": "source_type",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Source Type",
-   "options": "\nOnline OTA\nTravel Agent\nCorporate\nDirect\nWalk-in\nReferral\nEvent"
+   "options": "Business Source Type"
   },
   {
    "fieldname": "column_break_unms",
@@ -76,9 +76,9 @@
   },
   {
    "fieldname": "channel_category",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Channel Category",
-   "options": "Online\nOffline\nPartner\nInternal"
+   "options": "Business Channel Category"
   },
   {
    "fieldname": "commission_and_financial_info_tab",
@@ -98,11 +98,13 @@
    "options": "Percentage\nFixed Amount"
   },
   {
+   "depends_on": "eval:doc.commission_type == 'Percentage'",
    "fieldname": "commission_rate_",
    "fieldtype": "Float",
    "label": "Commission Rate (%)"
   },
   {
+   "depends_on": "eval:doc.commission_type == 'Fixed Amount'",
    "fieldname": "commision_rate_amount",
    "fieldtype": "Float",
    "label": "Commision Rate (Amount)"
@@ -167,7 +169,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-13 12:45:08.145218",
+ "modified": "2026-02-17 16:07:58.780062",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Business Source Category",
