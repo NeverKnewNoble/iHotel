@@ -27,7 +27,7 @@ def get_dashboard_data(from_date=None, to_date=None):
     occupancy_rate = round((occupied_rooms / total_rooms) * 100, 1) if total_rooms else 0
 
     # Revenue query with optional date filtering
-    revenue_conditions = "status = 'Checked' AND docstatus = 1"
+    revenue_conditions = "status = 'Checked In' AND docstatus = 1"
     revenue_values = {}
     if from_date:
         revenue_conditions += " AND expected_check_in >= %(from_date)s"
@@ -68,7 +68,7 @@ def get_dashboard_data(from_date=None, to_date=None):
     # Active stays (Reserved + Checked)
     active_stays = frappe.get_all(
         "Hotel Stay",
-        filters={"status": ["in", ["Reserved", "Checked"]], "docstatus": 1},
+        filters={"status": ["in", ["Reserved", "Checked In"]], "docstatus": 1},
         fields=["name", "guest", "room", "status", "expected_check_in", "expected_check_out", "room_rate"],
         order_by="expected_check_in asc",
         limit_page_length=10,

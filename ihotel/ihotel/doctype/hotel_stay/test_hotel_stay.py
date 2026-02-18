@@ -42,8 +42,8 @@ class TestHotelStay(FrappeTestCase):
 
 		stay.submit()
 
-		# Simulate check-in by updating the status to Checked
-		stay.status = "Checked"
+		# Simulate check-in by updating the status to Checked In
+		stay.status = "Checked In"
 		stay.actual_check_in = now_datetime()
 		stay.save(ignore_permissions=True)
 

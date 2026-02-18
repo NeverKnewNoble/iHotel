@@ -177,7 +177,7 @@ class IHotelDashboard {
 				<div class="ih-card">
 					<div class="ih-card-header">
 						<div class="ih-card-title">Active Stays</div>
-						<a class="ih-card-link" href="/app/hotel-stay?status=%5B%22in%22%2C%5B%22Reserved%22%2C%22Checked%22%5D%5D&docstatus=1">View All</a>
+						<a class="ih-card-link" href="/app/hotel-stay?status=%5B%22in%22%2C%5B%22Reserved%22%2C%22Checked%20In%22%5D%5D&docstatus=1">View All</a>
 					</div>
 					<div class="ih-card-body" style="padding: 0;">
 						${this.render_stays_table(d.active_stays)}
@@ -270,7 +270,7 @@ class IHotelDashboard {
 			return '<div class="ih-empty">No active stays</div>';
 		}
 		let rows = stays.map((s) => {
-			const badge_cls = s.status === "Checked" ? "checked" : "reserved";
+			const badge_cls = s.status === "Checked In" ? "checked" : "reserved";
 			const checkin = s.expected_check_in ? frappe.datetime.str_to_user(s.expected_check_in) : "-";
 			const checkout = s.expected_check_out ? frappe.datetime.str_to_user(s.expected_check_out) : "-";
 			return `<tr>

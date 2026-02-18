@@ -7,7 +7,7 @@ frappe.ui.form.on("Room", {
 		if (frm.doc.status === "Occupied") {
 			frappe.db.get_value("Hotel Stay", {
 				"room": frm.doc.name,
-				"status": ["in", ["Checked", "Reserved"]],
+				"status": ["in", ["Checked In", "Reserved"]],
 				"docstatus": 1
 			}, "name")
 			.then(r => {

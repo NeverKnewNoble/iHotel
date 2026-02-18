@@ -34,7 +34,7 @@ def late_checkout_alert():
 	stays = frappe.get_all(
 		"Hotel Stay",
 		filters={
-			"status": "Checked",
+			"status": "Checked In",
 			"docstatus": 1,
 			"expected_check_out": ["<", now],
 		},

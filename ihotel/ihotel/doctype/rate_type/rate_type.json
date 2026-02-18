@@ -13,7 +13,10 @@
   "is_active",
   "pricing_behavior_section",
   "pricing_method",
+  "column_break_rucr",
   "applicable_to",
+  "room_type",
+  "specific_room",
   "rules_and_conditions_tab",
   "minimum_stay_nights",
   "refundable",
@@ -146,12 +149,30 @@
    "fieldname": "internal_use_only",
    "fieldtype": "Check",
    "label": "Internal Use Only"
+  },
+  {
+   "fieldname": "column_break_rucr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.applicable_to == 'Room Type'",
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "label": "Room Type",
+   "options": "Room Type"
+  },
+  {
+   "depends_on": "eval:doc.applicable_to == 'Specific Room'",
+   "fieldname": "specific_room",
+   "fieldtype": "Link",
+   "label": "Specific Room",
+   "options": "Room"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-17 14:33:49.151499",
+ "modified": "2026-02-18 15:15:18.219594",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Rate Type",

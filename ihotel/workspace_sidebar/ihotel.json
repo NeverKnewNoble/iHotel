@@ -161,24 +161,24 @@
   {
    "child": 1,
    "collapsible": 1,
-   "icon": "codepen",
+   "icon": "user-lock",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Room Board",
-   "link_to": "room_board",
-   "link_type": "Page",
+   "label": "Guest",
+   "link_to": "Guest",
+   "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
   },
   {
    "child": 1,
    "collapsible": 1,
-   "icon": "bed",
+   "icon": "codepen",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Room Type",
-   "link_to": "Room Type",
-   "link_type": "DocType",
+   "label": "Room Board",
+   "link_to": "room_board",
+   "link_type": "Page",
    "show_arrow": 0,
    "type": "Link"
   },
@@ -202,6 +202,18 @@
    "keep_closed": 0,
    "label": "Rate",
    "link_to": "Rate Type",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "icon": "bed",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Room Type",
+   "link_to": "Room Type",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
@@ -325,7 +337,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-02-17 16:15:09.391202",
+ "modified": "2026-02-18 13:34:08.235753",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "iHotel",

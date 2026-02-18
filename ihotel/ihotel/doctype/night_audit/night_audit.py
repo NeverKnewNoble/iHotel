@@ -35,10 +35,10 @@ class NightAudit(Document):
             frappe.throw(_("Please configure Total Rooms in iHotel Settings"))
 
         # Get occupied rooms - count of checked-in stays
-        # Status "Checked" means the guest has checked in
+        # Status "Checked In" means the guest has checked in
         occupied_stays = frappe.get_all("Hotel Stay",
             filters={
-                "status": "Checked",
+                "status": "Checked In",
                 "docstatus": 1
             },
             fields=["name", "total_amount"])
@@ -85,7 +85,7 @@ class NightAudit(Document):
         occupied_stays = frappe.get_all(
             "Hotel Stay",
             filters={
-                "status": "Checked",  # Match the status in JSON
+                "status": "Checked In",  # Match the status in JSON
                 "docstatus": 1
             },
             fields=["name"]

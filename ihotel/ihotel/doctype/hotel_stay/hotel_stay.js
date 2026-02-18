@@ -3,24 +3,24 @@
 
 frappe.ui.form.on("Hotel Stay", {
 	onload: function(frm) {
-		// Set up room query filter on form load
 		setup_room_query(frm);
+		setup_rate_type_query(frm);
 	},
 
 	refresh(frm) {
-		// Set up room query filter to filter by room_type
 		setup_room_query(frm);
+		setup_rate_type_query(frm);
 
 		// Add custom buttons based on status
 		if (frm.doc.status === "Reserved" && !frm.is_new()) {
 			frm.add_custom_button(__("Check In"), function() {
-				frm.set_value("status", "Checked");
+				frm.set_value("status", "Checked In");
 				frm.set_value("actual_check_in", frappe.datetime.now_datetime());
 				frm.save();
 			});
 		}
 
-		if (frm.doc.status === "Checked" && !frm.is_new()) {
+		if (frm.doc.status === "Checked In" && !frm.is_new()) {
 			frm.add_custom_button(__("Check Out"), function() {
 				frm.set_value("status", "Checked Out");
 				frm.set_value("actual_check_out", frappe.datetime.now_datetime());
@@ -42,9 +42,19 @@ frappe.ui.form.on("Hotel Stay", {
 				});
 		}
 
-		// Update room query filter based on room_type
-		// Only show rooms that match the selected room_type
 		setup_room_query(frm);
+		setup_rate_type_query(frm);
+
+		// Clear rate_type if it no longer matches the new room_type
+		if (frm.doc.rate_type && frm.doc.room_type) {
+			frappe.db.get_value("Rate Type", frm.doc.rate_type, ["applicable_to", "room_type"])
+				.then(r => {
+					const rt = r.message;
+					if (rt && rt.applicable_to === "Room Type" && rt.room_type !== frm.doc.room_type) {
+						frm.set_value("rate_type", "");
+					}
+				});
+		}
 
 		// Clear room field if current room doesn't match the new room_type
 		if (frm.doc.room && frm.doc.room_type) {
@@ -135,32 +145,30 @@ frappe.ui.form.on("Stay Service Item", {
 	}
 });
 
-// Helper function to create room query filter
-function get_room_query_filters(doc) {
-	const filters = {};
-	// Only filter by room_type if it's selected
-	if (doc.room_type) {
-		filters["room_type"] = doc.room_type;
-	}
-	// Optionally filter by status if dates are set
-	if (doc.expected_check_in && doc.expected_check_out) {
-		filters["status"] = ["in", ["Available", "Housekeeping"]];
-	}
-	return { filters: filters };
+// Filter rate_type by room_type (All Rooms + Room Type-specific)
+function setup_rate_type_query(frm) {
+	frm.set_query("rate_type", function() {
+		if (frm.doc.room_type) {
+			return {
+				query: "ihotel.ihotel.doctype.hotel_stay.hotel_stay.get_rate_types_for_room_type",
+				filters: { room_type: frm.doc.room_type },
+			};
+		}
+		return {};
+	});
 }
 
-// Helper function to set up room query filter
+// Filter room by room_type using a server-side query
 function setup_room_query(frm) {
-	// Use set_query method
-	frm.set_query("room", function(doc) {
-		return get_room_query_filters(doc);
+	frm.set_query("room", function() {
+		if (frm.doc.room_type) {
+			return {
+				query: "ihotel.ihotel.doctype.hotel_stay.hotel_stay.get_rooms_for_room_type",
+				filters: { room_type: frm.doc.room_type },
+			};
+		}
+		return {};
 	});
-	// Also set it directly on the field as a backup
-	if (frm.fields_dict.room) {
-		frm.fields_dict.room.get_query = function(doc) {
-			return get_room_query_filters(doc);
-		};
-	}
 }
 
 function calculate_service_amount(frm, cdt, cdn) {

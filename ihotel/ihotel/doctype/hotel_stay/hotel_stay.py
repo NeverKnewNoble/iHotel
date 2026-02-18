@@ -8,6 +8,54 @@ from frappe import _
 from datetime import datetime, timedelta
 from frappe.utils import get_datetime
 
+@frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def get_rooms_for_room_type(doctype, txt, searchfield, start, page_len, filters):
+	"""Return Rooms filtered by room_type."""
+	room_type = (filters or {}).get("room_type")
+	conditions = []
+	values = []
+
+	if txt:
+		conditions.append("name LIKE %s")
+		values.append(f"%{txt}%")
+
+	if room_type:
+		conditions.append("room_type = %s")
+		values.append(room_type)
+
+	where = ("WHERE " + " AND ".join(conditions)) if conditions else ""
+
+	return frappe.db.sql(
+		f"SELECT name FROM `tabRoom` {where} ORDER BY name LIMIT %s, %s",
+		values + [start, page_len],
+	)
+
+
+@frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def get_rate_types_for_room_type(doctype, txt, searchfield, start, page_len, filters):
+	"""Return Rate Types applicable to a given room type (All Rooms + Room Type-specific)."""
+	room_type = (filters or {}).get("room_type")
+	conditions = []
+	values = []
+
+	if txt:
+		conditions.append(f"(name LIKE %s OR rate_type_name LIKE %s)")
+		values += [f"%{txt}%", f"%{txt}%"]
+
+	if room_type:
+		conditions.append("(applicable_to = 'All Rooms' OR (applicable_to = 'Room Type' AND room_type = %s))")
+		values.append(room_type)
+
+	where = ("WHERE " + " AND ".join(conditions)) if conditions else ""
+
+	return frappe.db.sql(
+		f"SELECT name FROM `tabRate Type` {where} ORDER BY name LIMIT %s, %s",
+		values + [start, page_len],
+	)
+
+
 class HotelStay(Document):
     """
     Hotel Stay document representing a guest reservation or stay.
@@ -40,12 +88,12 @@ class HotelStay(Document):
         Validate that the room is available for the selected dates.
         Checks for overlapping reservations with proper status matching.
         """
-        if self.room and self.status in ["Reserved", "Checked"]:
+        if self.room and self.status in ["Reserved", "Checked In"]:
             # Check for overlapping reservations (exclude cancelled and checked out)
             overlapping_stays = frappe.db.sql("""
                 SELECT name FROM `tabHotel Stay`
                 WHERE room = %s
-                AND status IN ('Reserved', 'Checked')
+                AND status IN ('Reserved', 'Checked In')
                 AND docstatus != 2
                 AND name != %s
                 AND (
@@ -152,7 +200,7 @@ class HotelStay(Document):
                     # Check if there are other active stays for this room
                     active_stays = frappe.db.exists("Hotel Stay", {
                         "room": self.room,
-                        "status": ["in", ["Reserved", "Checked"]],
+                        "status": ["in", ["Reserved", "Checked In"]],
                         "docstatus": 1,
                         "name": ["!=", self.name]
                     })
@@ -193,7 +241,7 @@ class HotelStay(Document):
             # Ensure there isn't another active stay keeping the room busy
             active_stay_exists = frappe.db.exists("Hotel Stay", {
                 "room": self.room,
-                "status": ["in", ["Reserved", "Checked"]],
+                "status": ["in", ["Reserved", "Checked In"]],
                 "docstatus": 1,
                 "name": ["!=", self.name]
             })
@@ -212,7 +260,7 @@ class HotelStay(Document):
         """
         Central place to mirror stay status transitions to the linked room.
         """
-        if self.status == "Checked":
+        if self.status == "Checked In":
             self.mark_room_as_occupied()
         elif self.status == "Checked Out":
             self.mark_room_as_available()

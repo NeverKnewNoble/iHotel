@@ -35,7 +35,7 @@ class MaintenanceRequest(Document):
 				# Check if room has an active stay
 				active_stay = frappe.db.exists("Hotel Stay", {
 					"room": self.room,
-					"status": ["in", ["Reserved", "Checked"]],
+					"status": ["in", ["Reserved", "Checked In"]],
 					"docstatus": 1,
 				})
 				room = frappe.get_doc("Room", self.room)

@@ -42,7 +42,7 @@ class Room(Document):
         if self.name:  # Only check for existing rooms
             current_stay = frappe.db.exists("Hotel Stay", {
                 "room": self.name,
-                "status": ["in", ["Checked", "Reserved"]],
+                "status": ["in", ["Checked In", "Reserved"]],
                 "docstatus": 1
             })
 

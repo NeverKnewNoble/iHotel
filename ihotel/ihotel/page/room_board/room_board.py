@@ -20,7 +20,7 @@ def get_room_board_data():
 				"Hotel Stay",
 				filters={
 					"room": room["name"],
-					"status": ["in", ["Reserved", "Checked"]],
+					"status": ["in", ["Reserved", "Checked In"]],
 					"docstatus": 1,
 				},
 				fieldname=["name", "guest", "expected_check_out"],
