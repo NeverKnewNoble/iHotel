@@ -1,0 +1,317 @@
+/* ══════════════════════════════════════
+   Room Board
+   ══════════════════════════════════════ */
+
+.rb-wrapper {
+	padding: 20px 20px 32px;
+	margin-top: 8px;
+}
+
+/* ── Filter card ── */
+.rb-filter-card {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 12px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.rb-filter-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 14px 18px;
+}
+
+.rb-filter-divider {
+	height: 1px;
+	background: var(--border-color);
+	margin: 0;
+}
+
+/* ── Search field ── */
+.rb-search-wrap {
+	position: relative;
+	flex: 1;
+	min-width: 200px;
+	max-width: 320px;
+}
+
+.rb-search-icon {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 15px;
+	height: 15px;
+	color: var(--text-muted);
+	pointer-events: none;
+}
+
+.rb-search {
+	width: 100%;
+	padding: 8px 12px 8px 34px;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	background: var(--bg-color);
+	color: var(--text-color);
+	font-size: 13px;
+	outline: none;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.rb-search:focus {
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+/* ── Select dropdowns ── */
+.rb-select-wrap {
+	position: relative;
+	min-width: 150px;
+}
+
+.rb-select-icon {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 14px;
+	height: 14px;
+	color: var(--text-muted);
+	pointer-events: none;
+}
+
+.rb-filter-type,
+.rb-filter-floor {
+	width: 100%;
+	padding: 8px 12px 8px 32px;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	background: var(--bg-color);
+	color: var(--text-color);
+	font-size: 13px;
+	outline: none;
+	cursor: pointer;
+	appearance: auto;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.rb-filter-type:focus,
+.rb-filter-floor:focus {
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+/* ── Clear button ── */
+.rb-clear-btn {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 7px 14px;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	background: transparent;
+	color: var(--text-muted);
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+	margin-left: auto;
+}
+
+.rb-clear-btn svg {
+	width: 13px;
+	height: 13px;
+}
+
+.rb-clear-btn:hover {
+	background: var(--bg-color);
+	color: var(--text-color);
+	border-color: var(--text-muted);
+}
+
+/* ── Pills row ── */
+.rb-pills-row {
+	padding: 12px 18px;
+}
+
+.rb-status-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.rb-dot {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.rb-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	border-radius: 20px;
+	border: 1px solid var(--border-color);
+	background: transparent;
+	color: var(--text-muted);
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+	line-height: 1;
+}
+
+.rb-pill:hover {
+	background: var(--bg-color);
+	color: var(--text-color);
+	border-color: var(--text-muted);
+}
+
+.rb-pill-count {
+	background: var(--border-color);
+	color: var(--text-muted);
+	border-radius: 10px;
+	padding: 1px 7px;
+	font-size: 11px;
+	font-weight: 600;
+	transition: all 0.15s;
+}
+
+/* Active states */
+.rb-pill.active {
+	color: #fff;
+	border-color: transparent;
+}
+
+.rb-pill.active .rb-pill-count {
+	background: rgba(255,255,255,0.25);
+	color: #fff;
+}
+
+.rb-pill.active[data-status=""]               { background: #374151; }
+.rb-pill.active[data-status="Available"]      { background: #10b981; }
+.rb-pill.active[data-status="Occupied"]       { background: #3b82f6; }
+.rb-pill.active[data-status="Dirty"]          { background: #f97316; }
+.rb-pill.active[data-status="Pickup"]         { background: #a855f7; }
+.rb-pill.active[data-status="Inspected"]      { background: #06b6d4; }
+.rb-pill.active[data-status="Housekeeping"]   { background: #f59e0b; }
+.rb-pill.active[data-status="Out of Order"]   { background: #ef4444; }
+.rb-pill.active[data-status="Out of Service"] { background: #6b7280; }
+
+/* ── Showing count ── */
+.rb-showing-count {
+	margin-left: auto;
+	font-size: 12px;
+	color: var(--text-muted);
+	white-space: nowrap;
+}
+
+/* ── Loading / empty ── */
+.rb-loading,
+.rb-empty {
+	padding: 60px 20px;
+	text-align: center;
+	color: var(--text-muted);
+	font-size: 14px;
+}
+
+/* ── Cards grid ── */
+.rb-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+	gap: 12px;
+}
+
+.rb-card {
+	display: block;
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-top: 3px solid var(--rb-status-color, #e5e7eb);
+	border-radius: 10px;
+	padding: 14px;
+	text-decoration: none;
+	color: inherit;
+	transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.rb-card:hover {
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	transform: translateY(-1px);
+	text-decoration: none;
+	color: inherit;
+}
+
+.rb-card-top {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 4px;
+}
+
+.rb-room-number {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.rb-status-dot-sm {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	margin-top: 4px;
+	flex-shrink: 0;
+}
+
+.rb-room-type {
+	font-size: 12px;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+.rb-floor {
+	font-size: 11px;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+.rb-status-label {
+	font-size: 11px;
+	font-weight: 600;
+	margin-top: 8px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.rb-guest {
+	font-size: 12px;
+	margin-top: 6px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.rb-checkout {
+	font-size: 11px;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .rb-search,
+[data-theme="dark"] .rb-filter-type,
+[data-theme="dark"] .rb-filter-floor {
+	background: var(--bg-color);
+}
+
+[data-theme="dark"] .rb-pill.active[data-status=""] {
+	background: #6b7280;
+}

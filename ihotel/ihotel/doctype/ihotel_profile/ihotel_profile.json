@@ -51,8 +51,8 @@
   {
    "fieldname": "hotel_stay",
    "fieldtype": "Link",
-   "label": "Hotel Stay",
-   "options": "Hotel Stay"
+   "label": "Check In",
+   "options": "Check In"
   },
   {
    "fieldname": "guest_information_section",
@@ -171,11 +171,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-24 23:25:35.531783",
+ "modified": "2026-02-19 09:26:11.051382",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "iHotel Profile",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

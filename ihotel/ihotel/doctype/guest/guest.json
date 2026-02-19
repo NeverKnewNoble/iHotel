@@ -6,37 +6,128 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "profile_tab",
+  "title",
   "guest_name",
   "section_break_jpeh",
   "phone",
-  "id_type",
-  "column_break_erkn",
   "email",
+  "column_break_erkn",
+  "language",
+  "marketing_opt_out",
+  "section_break_demographics",
+  "date_of_birth",
+  "nationality",
+  "column_break_demographics",
+  "gender",
+  "vip_type",
+  "section_break_identity",
+  "id_type",
   "id_number",
-  "section_break_jvwf",
+  "column_break_identity",
+  "loyalty_tier",
+  "section_break_address",
   "address",
-  "loyalty_tier"
+  "section_break_restricted",
+  "restricted",
+  "restriction_note",
+  "preferences_tab",
+  "preferences",
+  "notes_tab",
+  "guest_notes",
+  "stats_tab",
+  "total_stays",
+  "total_nights",
+  "column_break_stats",
+  "total_revenue",
+  "last_stay_date"
  ],
  "fields": [
+  {
+   "fieldname": "profile_tab",
+   "fieldtype": "Tab Break",
+   "label": "Profile"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Select",
+   "label": "Title",
+   "options": "\nMr\nMrs\nMs\nDr\nProf"
+  },
   {
    "fieldname": "guest_name",
    "fieldtype": "Data",
    "label": "Guest Name",
-   "unique": 1
-  },
-  {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "label": "Email"
+   "unique": 1,
+   "reqd": 1
   },
   {
    "fieldname": "section_break_jpeh",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Contact"
   },
   {
    "fieldname": "phone",
    "fieldtype": "Phone",
    "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_erkn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Select",
+   "label": "Preferred Language",
+   "options": "\nEnglish\nArabic\nFrench\nSpanish\nChinese\nGerman\nRussian\nOther"
+  },
+  {
+   "default": "0",
+   "fieldname": "marketing_opt_out",
+   "fieldtype": "Check",
+   "label": "Marketing Opt-Out"
+  },
+  {
+   "fieldname": "section_break_demographics",
+   "fieldtype": "Section Break",
+   "label": "Demographics"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "Nationality"
+  },
+  {
+   "fieldname": "column_break_demographics",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "\nMale\nFemale\nUnspecified"
+  },
+  {
+   "fieldname": "vip_type",
+   "fieldtype": "Select",
+   "label": "VIP Type",
+   "options": "\nVIP\nVVIP\nCelebrity"
+  },
+  {
+   "fieldname": "section_break_identity",
+   "fieldtype": "Section Break",
+   "label": "Identification"
   },
   {
    "fieldname": "id_type",
@@ -45,17 +136,24 @@
    "options": "Passport\nDriver License\nNational ID\nOther"
   },
   {
-   "fieldname": "column_break_erkn",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "id_number",
    "fieldtype": "Data",
    "label": "ID Number"
   },
   {
-   "fieldname": "section_break_jvwf",
-   "fieldtype": "Section Break"
+   "fieldname": "column_break_identity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loyalty_tier",
+   "fieldtype": "Select",
+   "label": "Loyalty Tier",
+   "options": "Standard\nSilver\nGold\nPlatinum"
+  },
+  {
+   "fieldname": "section_break_address",
+   "fieldtype": "Section Break",
+   "label": "Address"
   },
   {
    "fieldname": "address",
@@ -63,16 +161,83 @@
    "label": "Address"
   },
   {
-   "fieldname": "loyalty_tier",
-   "fieldtype": "Select",
-   "label": "Loyalty Tier",
-   "options": "Standard\nSilver\nGold\nPlatinum"
+   "fieldname": "section_break_restricted",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "restricted",
+   "fieldtype": "Check",
+   "label": "Restricted Guest",
+   "bold": 1
+  },
+  {
+   "depends_on": "eval:doc.restricted == 1",
+   "fieldname": "restriction_note",
+   "fieldtype": "Small Text",
+   "label": "Restriction Reason",
+   "mandatory_depends_on": "eval:doc.restricted == 1"
+  },
+  {
+   "fieldname": "preferences_tab",
+   "fieldtype": "Tab Break",
+   "label": "Preferences"
+  },
+  {
+   "fieldname": "preferences",
+   "fieldtype": "Table",
+   "label": "Preferences",
+   "options": "Guest Preference"
+  },
+  {
+   "fieldname": "notes_tab",
+   "fieldtype": "Tab Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "guest_notes",
+   "fieldtype": "Table",
+   "label": "Notes",
+   "options": "Guest Note"
+  },
+  {
+   "fieldname": "stats_tab",
+   "fieldtype": "Tab Break",
+   "label": "Stay Statistics"
+  },
+  {
+   "fieldname": "total_stays",
+   "fieldtype": "Int",
+   "label": "Total Stays",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_nights",
+   "fieldtype": "Int",
+   "label": "Total Nights",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_stats",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_revenue",
+   "fieldtype": "Currency",
+   "label": "Total Revenue",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_stay_date",
+   "fieldtype": "Date",
+   "label": "Last Stay Date",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-15 21:19:41.415767",
+ "modified": "2026-02-19 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Guest",

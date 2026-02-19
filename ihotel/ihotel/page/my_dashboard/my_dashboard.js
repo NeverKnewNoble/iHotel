@@ -33,13 +33,9 @@ class IHotelDashboard {
 	}
 
 	refresh() {
-		let args = {};
-		if (this.from_date) args.from_date = this.from_date;
-		if (this.to_date) args.to_date = this.to_date;
-
 		frappe.call({
 			method: "ihotel.ihotel.page.my_dashboard.my_dashboard.get_dashboard_data",
-			args: args,
+			args: {},
 			callback: (r) => {
 				if (r.message) {
 					this.data = r.message;
@@ -71,20 +67,6 @@ class IHotelDashboard {
 					</svg>
 					Refresh
 				</button>
-			</div>
-
-			<!-- Date Filter -->
-			<div class="ih-date-filter">
-				<div class="ih-filter-group">
-					<label>From</label>
-					<input type="date" class="ih-date-input" data-field="from_date" value="${this.from_date || ''}">
-				</div>
-				<div class="ih-filter-group">
-					<label>To</label>
-					<input type="date" class="ih-date-input" data-field="to_date" value="${this.to_date || ''}">
-				</div>
-				<button class="btn btn-xs btn-default ih-filter-btn" data-action="apply-filter">Apply</button>
-				<button class="btn btn-xs btn-default ih-filter-btn" data-action="clear-filter">Clear</button>
 			</div>
 
 			<!-- KPI Cards -->
@@ -177,7 +159,7 @@ class IHotelDashboard {
 				<div class="ih-card">
 					<div class="ih-card-header">
 						<div class="ih-card-title">Active Stays</div>
-						<a class="ih-card-link" href="/app/hotel-stay?status=%5B%22in%22%2C%5B%22Reserved%22%2C%22Checked%20In%22%5D%5D&docstatus=1">View All</a>
+						<a class="ih-card-link" href="/app/check-in?status=%5B%22in%22%2C%5B%22Reserved%22%2C%22Checked%20In%22%5D%5D&docstatus=1">View All</a>
 					</div>
 					<div class="ih-card-body" style="padding: 0;">
 						${this.render_stays_table(d.active_stays)}
@@ -198,18 +180,6 @@ class IHotelDashboard {
 				</div>
 			</div>
 		`);
-
-		// Bind date filter
-		this.container.find('[data-action="apply-filter"]').on("click", () => {
-			this.from_date = this.container.find('[data-field="from_date"]').val() || null;
-			this.to_date = this.container.find('[data-field="to_date"]').val() || null;
-			this.refresh();
-		});
-		this.container.find('[data-action="clear-filter"]').on("click", () => {
-			this.from_date = null;
-			this.to_date = null;
-			this.refresh();
-		});
 
 		// Bind refresh
 		this.container.find('[data-action="refresh"]').on("click", () => {
@@ -274,7 +244,7 @@ class IHotelDashboard {
 			const checkin = s.expected_check_in ? frappe.datetime.str_to_user(s.expected_check_in) : "-";
 			const checkout = s.expected_check_out ? frappe.datetime.str_to_user(s.expected_check_out) : "-";
 			return `<tr>
-				<td><a href="/app/hotel-stay/${encodeURIComponent(s.name)}">${frappe.utils.escape_html(s.guest || s.name)}</a></td>
+				<td><a href="/app/check-in/${encodeURIComponent(s.name)}">${frappe.utils.escape_html(s.guest || s.name)}</a></td>
 				<td>${frappe.utils.escape_html(s.room || "-")}</td>
 				<td><span class="ih-badge ${badge_cls}">${s.status}</span></td>
 				<td>${checkin}</td>

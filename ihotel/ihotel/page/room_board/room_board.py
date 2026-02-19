@@ -17,7 +17,7 @@ def get_room_board_data():
 
 		if room["status"] == "Occupied":
 			stay = frappe.db.get_value(
-				"Hotel Stay",
+				"Check In",
 				filters={
 					"room": room["name"],
 					"status": ["in", ["Reserved", "Checked In"]],

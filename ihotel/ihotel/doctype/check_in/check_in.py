@@ -9,6 +9,70 @@ from datetime import datetime, timedelta
 from frappe.utils import get_datetime
 
 @frappe.whitelist()
+def move_room(check_in_name, new_room, reason=None):
+	"""Move a checked-in guest to a different room."""
+	check_in = frappe.get_doc("Check In", check_in_name)
+
+	if check_in.status != "Checked In":
+		frappe.throw(_("Room move is only allowed for guests who are currently checked in."))
+
+	if check_in.room == new_room:
+		frappe.throw(_("Guest is already assigned to room {0}.").format(new_room))
+
+	# Confirm the destination room is available
+	new_room_doc = frappe.get_doc("Room", new_room)
+	if new_room_doc.status not in ("Available", "Housekeeping"):
+		frappe.throw(_("Room {0} is not available (current status: {1}).").format(
+			new_room, new_room_doc.status
+		))
+
+	# Confirm no active stay already using that room
+	conflict = frappe.db.exists("Check In", {
+		"room": new_room,
+		"status": ["in", ["Reserved", "Checked In"]],
+		"docstatus": 1,
+		"name": ["!=", check_in_name],
+	})
+	if conflict:
+		frappe.throw(_("Room {0} is already occupied by another guest.").format(new_room))
+
+	old_room = check_in.room
+
+	# Free the old room
+	if old_room:
+		old_room_doc = frappe.get_doc("Room", old_room)
+		old_room_doc.status = "Available"
+		old_room_doc.save(ignore_permissions=True)
+
+	# Occupy the new room
+	new_room_doc.status = "Occupied"
+	new_room_doc.save(ignore_permissions=True)
+
+	# Update the Check In record
+	check_in.db_set("room", new_room)
+
+	# Log a comment with the move details
+	note = _("Room moved from {0} to {1}.").format(old_room or _("(none)"), new_room)
+	if reason:
+		note += " " + _("Reason: {0}").format(reason)
+	frappe.get_doc({
+		"doctype": "Comment",
+		"comment_type": "Info",
+		"reference_doctype": "Check In",
+		"reference_name": check_in_name,
+		"content": note,
+	}).insert(ignore_permissions=True)
+
+	frappe.msgprint(
+		_("Guest moved from Room {0} to Room {1}.").format(old_room or _("(none)"), new_room),
+		indicator="green",
+		alert=True,
+	)
+
+	return new_room
+
+
+@frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def get_rooms_for_room_type(doctype, txt, searchfield, start, page_len, filters):
 	"""Return Rooms filtered by room_type."""
@@ -56,7 +120,7 @@ def get_rate_types_for_room_type(doctype, txt, searchfield, start, page_len, fil
 	)
 
 
-class HotelStay(Document):
+class CheckIn(Document):
     """
     Hotel Stay document representing a guest reservation or stay.
     Manages check-in/check-out, room assignment, billing, and room status updates.
@@ -91,7 +155,7 @@ class HotelStay(Document):
         if self.room and self.status in ["Reserved", "Checked In"]:
             # Check for overlapping reservations (exclude cancelled and checked out)
             overlapping_stays = frappe.db.sql("""
-                SELECT name FROM `tabHotel Stay`
+                SELECT name FROM `tabCheck In`
                 WHERE room = %s
                 AND status IN ('Reserved', 'Checked In')
                 AND docstatus != 2
@@ -198,7 +262,7 @@ class HotelStay(Document):
                 # Only update status if room is currently marked as Occupied
                 if room.status == "Occupied":
                     # Check if there are other active stays for this room
-                    active_stays = frappe.db.exists("Hotel Stay", {
+                    active_stays = frappe.db.exists("Check In", {
                         "room": self.room,
                         "status": ["in", ["Reserved", "Checked In"]],
                         "docstatus": 1,
@@ -239,7 +303,7 @@ class HotelStay(Document):
 
         try:
             # Ensure there isn't another active stay keeping the room busy
-            active_stay_exists = frappe.db.exists("Hotel Stay", {
+            active_stay_exists = frappe.db.exists("Check In", {
                 "room": self.room,
                 "status": ["in", ["Reserved", "Checked In"]],
                 "docstatus": 1,

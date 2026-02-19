@@ -36,7 +36,7 @@ class NightAudit(Document):
 
         # Get occupied rooms - count of checked-in stays
         # Status "Checked In" means the guest has checked in
-        occupied_stays = frappe.get_all("Hotel Stay",
+        occupied_stays = frappe.get_all("Check In",
             filters={
                 "status": "Checked In",
                 "docstatus": 1
@@ -83,7 +83,7 @@ class NightAudit(Document):
         Only processes checked-in stays that are submitted.
         """
         occupied_stays = frappe.get_all(
-            "Hotel Stay",
+            "Check In",
             filters={
                 "status": "Checked In",  # Match the status in JSON
                 "docstatus": 1
@@ -92,7 +92,7 @@ class NightAudit(Document):
         )
 
         for stay in occupied_stays:
-            stay_doc = frappe.get_doc("Hotel Stay", stay.name)
+            stay_doc = frappe.get_doc("Check In", stay.name)
             profile_doc = self.ensure_profile_for_stay(stay_doc)
             self.add_payment_entry(profile_doc, stay_doc)
             # self.create_journal_entry(stay_doc)

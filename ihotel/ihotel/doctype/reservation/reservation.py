@@ -4,16 +4,20 @@
 import frappe
 from frappe.model.document import Document
 from frappe import _
-from frappe.utils import getdate, date_diff, cint
+from frappe.utils import getdate, date_diff, cint, nowdate
+import random
+import string
 
 
 class Reservation(Document):
 	def validate(self):
 		self.validate_dates()
 		self.calculate_days()
+		self.calculate_totals()
 		self.validate_room_availability()
 		self.validate_guest_capacity()
 		self.validate_status_transition()
+		self.sync_guest_details()
 
 	def validate_dates(self):
 		if self.check_in_date and self.check_out_date:
@@ -23,6 +27,16 @@ class Reservation(Document):
 	def calculate_days(self):
 		if self.check_in_date and self.check_out_date:
 			self.days = date_diff(self.check_out_date, self.check_in_date)
+
+	def calculate_totals(self):
+		if self.rent and self.days:
+			self.total_rent = (self.rent or 0) * self.days
+		tax = self.tax or 0
+		discount = self.discount or 0
+		other = self.other_charges or 0
+		total_rent = self.total_rent or 0
+		self.total_rental = total_rent + tax
+		self.total_charges = total_rent + tax + other - discount
 
 	def validate_room_availability(self):
 		if not self.room or self.status == "cancelled":
@@ -53,12 +67,13 @@ class Reservation(Document):
 			)
 
 	def validate_guest_capacity(self):
-		if self.no_of_guests and self.room_type:
+		total_guests = (self.adults or 0) + (self.children or 0)
+		if total_guests and self.room_type:
 			max_capacity = frappe.db.get_value("Room Type", self.room_type, "maximum_capacity")
-			if max_capacity and cint(self.no_of_guests) > cint(max_capacity):
+			if max_capacity and total_guests > cint(max_capacity):
 				frappe.throw(
 					_("Number of guests ({0}) exceeds maximum capacity ({1}) for room type {2}").format(
-						self.no_of_guests, max_capacity, self.room_type
+						total_guests, max_capacity, self.room_type
 					)
 				)
 
@@ -84,6 +99,24 @@ class Reservation(Document):
 				)
 			)
 
+		# Auto-generate cancellation number when cancelling
+		if self.status == "cancelled" and not self.cancellation_number:
+			self.cancellation_number = "CXL-" + "".join(
+				random.choices(string.ascii_uppercase + string.digits, k=8)
+			)
+
+	def sync_guest_details(self):
+		"""If a Guest profile is selected, auto-fill contact fields."""
+		if self.guest and not self.full_name:
+			guest = frappe.get_cached_doc("Guest", self.guest)
+			self.full_name = guest.guest_name
+			if not self.email_address:
+				self.email_address = guest.email
+			if not self.phone_number:
+				self.phone_number = guest.phone
+			if not self.date_of_birth:
+				self.date_of_birth = guest.date_of_birth
+
 
 @frappe.whitelist()
 def convert_to_hotel_stay(reservation_name):
@@ -93,13 +126,13 @@ def convert_to_hotel_stay(reservation_name):
 		frappe.throw(_("Cannot convert a cancelled reservation"))
 
 	if reservation.hotel_stay:
-		frappe.throw(_("This reservation has already been converted to Hotel Stay: {0}").format(
+		frappe.throw(_("This reservation has already been converted to Check In: {0}").format(
 			reservation.hotel_stay
 		))
 
-	# Look up or create Guest
-	guest = None
-	if reservation.full_name:
+	# Use linked Guest profile or look up / create from full_name
+	guest = reservation.guest
+	if not guest and reservation.full_name:
 		guest = frappe.db.get_value("Guest", {"guest_name": reservation.full_name})
 		if not guest:
 			guest_doc = frappe.get_doc({
@@ -115,14 +148,14 @@ def convert_to_hotel_stay(reservation_name):
 	check_in_dt = None
 	check_out_dt = None
 	if reservation.check_in_date:
-		check_in_time = reservation.check_in_time or "14:00:00"
+		check_in_time = str(reservation.check_in_time or "14:00:00")
 		check_in_dt = f"{reservation.check_in_date} {check_in_time}"
 	if reservation.check_out_date:
-		check_out_time = reservation.check_out_time or "11:00:00"
+		check_out_time = str(reservation.check_out_time or "11:00:00")
 		check_out_dt = f"{reservation.check_out_date} {check_out_time}"
 
 	hotel_stay = frappe.get_doc({
-		"doctype": "Hotel Stay",
+		"doctype": "Check In",
 		"guest": guest,
 		"room": reservation.room,
 		"room_type": reservation.room_type,
@@ -135,13 +168,16 @@ def convert_to_hotel_stay(reservation_name):
 	})
 	hotel_stay.insert(ignore_permissions=True)
 
-	# Update reservation
+	# Link back to the guest profile
+	if guest:
+		reservation.db_set("guest", guest)
+
 	reservation.db_set("hotel_stay", hotel_stay.name)
 	reservation.db_set("status", "confirmed")
 
 	frappe.msgprint(
-		_("Hotel Stay {0} created successfully").format(
-			frappe.utils.get_link_to_form("Hotel Stay", hotel_stay.name)
+		_("Check In {0} created successfully").format(
+			frappe.utils.get_link_to_form("Check In", hotel_stay.name)
 		),
 		indicator="green",
 		alert=True,

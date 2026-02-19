@@ -9,7 +9,7 @@ def auto_no_show():
 	"""Mark Hotel Stay as No Show if Reserved and check-in was > 24h ago."""
 	cutoff = add_days(now_datetime(), -1)
 	stays = frappe.get_all(
-		"Hotel Stay",
+		"Check In",
 		filters={
 			"status": "Reserved",
 			"docstatus": 1,
@@ -19,7 +19,7 @@ def auto_no_show():
 	)
 	for stay_name in stays:
 		try:
-			stay = frappe.get_doc("Hotel Stay", stay_name)
+			stay = frappe.get_doc("Check In", stay_name)
 			stay.status = "No Show"
 			stay.save(ignore_permissions=True)
 			frappe.db.commit()
@@ -32,7 +32,7 @@ def late_checkout_alert():
 	"""Create Notification Log for stays past expected check-out."""
 	now = now_datetime()
 	stays = frappe.get_all(
-		"Hotel Stay",
+		"Check In",
 		filters={
 			"status": "Checked In",
 			"docstatus": 1,
@@ -43,7 +43,7 @@ def late_checkout_alert():
 	for stay in stays:
 		# Avoid duplicate notifications
 		existing = frappe.db.exists("Notification Log", {
-			"document_type": "Hotel Stay",
+			"document_type": "Check In",
 			"document_name": stay.name,
 			"subject": ["like", "%late checkout%"],
 		})
@@ -52,7 +52,7 @@ def late_checkout_alert():
 				"doctype": "Notification Log",
 				"for_user": "Administrator",
 				"type": "Alert",
-				"document_type": "Hotel Stay",
+				"document_type": "Check In",
 				"document_name": stay.name,
 				"subject": f"Late checkout: {stay.guest or ''} in room {stay.room or ''} "
 				           f"(expected {stay.expected_check_out})",

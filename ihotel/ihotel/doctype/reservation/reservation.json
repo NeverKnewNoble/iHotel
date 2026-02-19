@@ -5,38 +5,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "stay_and_rent_details_tab",
-  "check_in_date",
-  "check_out_date",
-  "column_break_quex",
-  "check_in_time",
-  "check_out_time",
-  "column_break_nzjo",
-  "days",
-  "business_source_category",
-  "stay_details_section",
-  "room",
-  "building",
-  "column_break_bxqg",
-  "room_type",
-  "floor",
-  "column_break_zizh",
-  "no_of_guests",
-  "status",
-  "rate_details_section",
-  "rate_type",
-  "section_break_hxvt",
-  "rent",
-  "total_rent",
-  "discount",
-  "other_charges",
-  "column_break_lvby",
-  "tax",
-  "total_rental",
-  "deposit",
-  "total_charges",
   "guest_details_tab",
-  "customer",
+  "guest",
   "personal_details_section",
   "full_name",
   "column_break_hzor",
@@ -51,37 +21,90 @@
   "state",
   "column_break_ulel",
   "country",
-  "postal_code"
+  "postal_code",
+  "stay_and_rent_details_tab",
+  "check_in_date",
+  "check_in_time",
+  "column_break_quex",
+  "check_out_date",
+  "check_out_time",
+  "column_break_nzjo",
+  "days",
+  "no_of_rooms",
+  "stay_details_section",
+  "room_type",
+  "room",
+  "floor",
+  "building",
+  "column_break_bxqg",
+  "adults",
+  "children",
+  "market_segment",
+  "business_source_category",
+  "status_section",
+  "status",
+  "hotel_stay",
+  "column_break_status",
+  "cancellation_reason",
+  "cancellation_number",
+  "rate_details_section",
+  "rate_type",
+  "section_break_hxvt",
+  "rent",
+  "discount",
+  "other_charges",
+  "column_break_lvby",
+  "tax",
+  "total_rent",
+  "total_rental",
+  "deposit",
+  "total_charges",
+  "requests_section",
+  "special_requests",
+  "comments",
+  "column_break_requests",
+  "eta",
+  "no_post",
+  "guarantee_and_payment_tab",
+  "guarantee_section",
+  "guarantee_type",
+  "column_break_guarantee",
+  "payment_method",
+  "section_break_zons",
+  "credit_card_type",
+  "column_break_walv",
+  "credit_card_last4",
+  "column_break_mvqd",
+  "card_expiry"
  ],
  "fields": [
   {
    "fieldname": "stay_and_rent_details_tab",
    "fieldtype": "Tab Break",
-   "label": "Stay And Rent Details"
+   "label": "Stay & Rate Details"
   },
   {
    "fieldname": "check_in_date",
    "fieldtype": "Date",
-   "label": "Check In Date"
+   "in_list_view": 1,
+   "label": "Check In Date",
+   "reqd": 1
   },
   {
-   "fieldname": "guest_details_tab",
-   "fieldtype": "Tab Break",
-   "label": "Guest Details"
-  },
-  {
-   "fieldname": "check_out_date",
-   "fieldtype": "Date",
-   "label": "Check Out Date"
+   "fieldname": "check_in_time",
+   "fieldtype": "Time",
+   "label": "Check In Time"
   },
   {
    "fieldname": "column_break_quex",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "check_in_time",
-   "fieldtype": "Time",
-   "label": "Check In Time"
+   "fieldname": "check_out_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Check Out Date",
+   "reqd": 1
   },
   {
    "fieldname": "check_out_time",
@@ -95,13 +118,14 @@
   {
    "fieldname": "days",
    "fieldtype": "Int",
-   "label": "Days"
+   "label": "Days",
+   "read_only": 1
   },
   {
-   "fieldname": "business_source_category",
-   "fieldtype": "Link",
-   "label": "Business Source Category",
-   "options": "Business Source Category"
+   "default": "1",
+   "fieldname": "no_of_rooms",
+   "fieldtype": "Int",
+   "label": "No. of Rooms"
   },
   {
    "fieldname": "stay_details_section",
@@ -109,20 +133,9 @@
    "label": "Stay Details"
   },
   {
-   "fetch_from": "room.building",
-   "fieldname": "building",
-   "fieldtype": "Data",
-   "label": "Building"
-  },
-  {
-   "fetch_from": "room.floor",
-   "fieldname": "floor",
-   "fieldtype": "Data",
-   "label": "Floor "
-  },
-  {
    "fieldname": "room_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Room Type",
    "options": "Room Type"
   },
@@ -133,23 +146,46 @@
    "options": "Room"
   },
   {
-   "fieldname": "no_of_guests",
-   "fieldtype": "Int",
-   "label": "No. of Guests"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "pending\nconfirmed\ncancelled"
-  },
-  {
    "fieldname": "column_break_bxqg",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_zizh",
-   "fieldtype": "Column Break"
+   "fetch_from": "room.building",
+   "fieldname": "building",
+   "fieldtype": "Data",
+   "label": "Building",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "room.floor",
+   "fieldname": "floor",
+   "fieldtype": "Data",
+   "label": "Floor",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "adults",
+   "fieldtype": "Int",
+   "label": "Adults"
+  },
+  {
+   "default": "0",
+   "fieldname": "children",
+   "fieldtype": "Int",
+   "label": "Children"
+  },
+  {
+   "fieldname": "market_segment",
+   "fieldtype": "Select",
+   "label": "Market Segment",
+   "options": "\nCorporate\nLeisure\nGroup\nOTA\nWalk-In\nGovernment\nOther"
+  },
+  {
+   "fieldname": "business_source_category",
+   "fieldtype": "Link",
+   "label": "Business Source",
+   "options": "Business Source Category"
   },
   {
    "fieldname": "rate_details_section",
@@ -169,26 +205,7 @@
   {
    "fieldname": "rent",
    "fieldtype": "Currency",
-   "label": "Rent"
-  },
-  {
-   "fieldname": "total_rent",
-   "fieldtype": "Currency",
-   "label": "Total Rent"
-  },
-  {
-   "fieldname": "column_break_lvby",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "tax",
-   "fieldtype": "Currency",
-   "label": "Tax"
-  },
-  {
-   "fieldname": "total_rental",
-   "fieldtype": "Currency",
-   "label": "Total Rental"
+   "label": "Rate / Night"
   },
   {
    "fieldname": "discount",
@@ -201,6 +218,27 @@
    "label": "Other Charges"
   },
   {
+   "fieldname": "column_break_lvby",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tax",
+   "fieldtype": "Currency",
+   "label": "Tax"
+  },
+  {
+   "fieldname": "total_rent",
+   "fieldtype": "Currency",
+   "label": "Total Rent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_rental",
+   "fieldtype": "Currency",
+   "label": "Total (incl. Tax)",
+   "read_only": 1
+  },
+  {
    "fieldname": "deposit",
    "fieldtype": "Currency",
    "label": "Deposit"
@@ -208,7 +246,128 @@
   {
    "fieldname": "total_charges",
    "fieldtype": "Currency",
-   "label": "Total Charges"
+   "label": "Total Charges",
+   "read_only": 1
+  },
+  {
+   "fieldname": "guarantee_section",
+   "fieldtype": "Section Break",
+   "label": "Guarantee And Payment"
+  },
+  {
+   "fieldname": "guarantee_type",
+   "fieldtype": "Select",
+   "label": "Guarantee Type",
+   "options": "\nCredit Card\nCompany\nDeposit\n6PM Courtesy Hold\nNo Guarantee"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "Payment Method",
+   "options": "\nVisa\nMastercard\nAmerican Express\nCash\nDirect Bill\nOther"
+  },
+  {
+   "fieldname": "column_break_guarantee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:['Visa','Mastercard','American Express'].includes(doc.payment_method)",
+   "fieldname": "credit_card_type",
+   "fieldtype": "Select",
+   "label": "Card Type",
+   "options": "\nVisa\nMastercard\nAmerican Express\nOther"
+  },
+  {
+   "depends_on": "eval:['Visa','Mastercard','American Express'].includes(doc.payment_method)",
+   "fieldname": "credit_card_last4",
+   "fieldtype": "Data",
+   "label": "Card Last 4 Digits"
+  },
+  {
+   "depends_on": "eval:['Visa','Mastercard','American Express'].includes(doc.payment_method)",
+   "fieldname": "card_expiry",
+   "fieldtype": "Data",
+   "label": "Card Expiry (MM/YY)"
+  },
+  {
+   "fieldname": "requests_section",
+   "fieldtype": "Section Break",
+   "label": "Guest Requests"
+  },
+  {
+   "fieldname": "special_requests",
+   "fieldtype": "Text",
+   "label": "Special Requests"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  },
+  {
+   "fieldname": "column_break_requests",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "eta",
+   "fieldtype": "Time",
+   "label": "ETA (Estimated Arrival)"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_post",
+   "fieldtype": "Check",
+   "label": "No Post (block room charges)"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "pending\nconfirmed\ncancelled"
+  },
+  {
+   "fieldname": "hotel_stay",
+   "fieldtype": "Link",
+   "label": "Check In Record",
+   "options": "Check In",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_status",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.status === 'cancelled'",
+   "fieldname": "cancellation_reason",
+   "fieldtype": "Select",
+   "label": "Cancellation Reason",
+   "mandatory_depends_on": "eval:doc.status === 'cancelled'",
+   "options": "\nGuest Request\nNo Show\nDuplicate Booking\nRate Dispute\nOther"
+  },
+  {
+   "fieldname": "cancellation_number",
+   "fieldtype": "Data",
+   "label": "Cancellation Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "guest_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Guest Details"
+  },
+  {
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Guest Profile",
+   "options": "Guest"
   },
   {
    "fieldname": "personal_details_section",
@@ -227,7 +386,7 @@
   {
    "fieldname": "date_of_birth",
    "fieldtype": "Date",
-   "label": "Date Of Birth "
+   "label": "Date of Birth"
   },
   {
    "fieldname": "column_break_kshj",
@@ -246,7 +405,8 @@
   {
    "fieldname": "email_address",
    "fieldtype": "Data",
-   "label": "Email Address"
+   "label": "Email Address",
+   "options": "Email"
   },
   {
    "fieldname": "city",
@@ -283,16 +443,27 @@
    "label": "Postal Code"
   },
   {
-   "fieldname": "customer",
-   "fieldtype": "Link",
-   "label": "Customer",
-   "options": "Customer"
+   "fieldname": "guarantee_and_payment_tab",
+   "fieldtype": "Tab Break",
+   "label": "Guarantee And Payment"
+  },
+  {
+   "fieldname": "section_break_zons",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_walv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_mvqd",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-17 15:02:32.283685",
+ "modified": "2026-02-19 12:55:11.200793",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Reservation",

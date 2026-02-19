@@ -88,7 +88,7 @@ def get_data(filters):
         FROM
             `tabRoom` r
         LEFT JOIN
-            `tabHotel Stay` hs ON hs.room = r.name
+            `tabCheck In` hs ON hs.room = r.name
             AND hs.status IN ('Checked In', 'Reserved')
             AND hs.docstatus = 1
             {date_filter}

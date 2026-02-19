@@ -11,12 +11,22 @@
   "description",
   "column_break_pxes",
   "is_active",
-  "pricing_behavior_section",
-  "pricing_method",
-  "column_break_rucr",
+  "sell_message",
+  "classification_section",
+  "rate_category",
+  "market_code",
+  "column_break_cls1",
+  "source_code",
+  "rate_class",
   "applicable_to",
   "room_type",
   "specific_room",
+  "pricing_tab",
+  "rate_schedule",
+  "default_rate_section",
+  "base_rate",
+  "column_break_rucr",
+  "pricing_method",
   "rules_and_conditions_tab",
   "minimum_stay_nights",
   "refundable",
@@ -25,6 +35,12 @@
   "maximum_stay_nights",
   "includes_taxes",
   "allow_discount",
+  "stay_restrictions_section",
+  "closed_to_arrival",
+  "column_break_restr",
+  "closed_to_departure",
+  "long_info_tab",
+  "long_info",
   "visibility_tab",
   "available_for_online_booking",
   "column_break_nqih",
@@ -54,27 +70,101 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "is_active",
    "fieldtype": "Check",
    "label": "Is Active"
   },
   {
-   "fieldname": "pricing_behavior_section",
+   "description": "Short promotional message shown to reservation agents when this rate is selected.",
+   "fieldname": "sell_message",
+   "fieldtype": "Small Text",
+   "label": "Sell Message"
+  },
+  {
+   "fieldname": "classification_section",
    "fieldtype": "Section Break",
-   "label": "Pricing Behavior"
+   "label": "Classification"
+  },
+  {
+   "fieldname": "rate_category",
+   "fieldtype": "Select",
+   "label": "Rate Category",
+   "options": "\nBAR\nCorporate\nPackage\nComplimentary\nNegotiated\nGroup\nGovernment\nOther"
+  },
+  {
+   "fieldname": "market_code",
+   "fieldtype": "Link",
+   "label": "Market Code",
+   "options": "Market Code"
+  },
+  {
+   "fieldname": "column_break_cls1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_code",
+   "fieldtype": "Link",
+   "label": "Source Code",
+   "options": "Source Code"
+  },
+  {
+   "description": "Lower number = higher priority. Used when multiple rates qualify for the same reservation.",
+   "fieldname": "rate_class",
+   "fieldtype": "Int",
+   "label": "Rate Class / Priority"
+  },
+  {
+   "fieldname": "applicable_to",
+   "fieldtype": "Select",
+   "label": "Applicable To",
+   "options": "All Rooms\nRoom Type\nSpecific Room"
+  },
+  {
+   "depends_on": "eval:doc.applicable_to == 'Room Type'",
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "label": "Room Type",
+   "options": "Room Type"
+  },
+  {
+   "depends_on": "eval:doc.applicable_to == 'Specific Room'",
+   "fieldname": "specific_room",
+   "fieldtype": "Link",
+   "label": "Specific Room",
+   "options": "Room"
+  },
+  {
+   "fieldname": "pricing_tab",
+   "fieldtype": "Tab Break",
+   "label": "Rate Schedule"
+  },
+  {
+   "fieldname": "rate_schedule",
+   "fieldtype": "Table",
+   "label": "Rate Schedule",
+   "options": "Rate Schedule"
+  },
+  {
+   "fieldname": "default_rate_section",
+   "fieldtype": "Section Break",
+   "label": "Default / Fallback Rate"
+  },
+  {
+   "description": "Used when no matching rate schedule row exists for the selected room type and dates.",
+   "fieldname": "base_rate",
+   "fieldtype": "Currency",
+   "label": "Base Rate (per night)"
+  },
+  {
+   "fieldname": "column_break_rucr",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "pricing_method",
    "fieldtype": "Select",
    "label": "Pricing Method",
    "options": "Per Night\nPer Person\nPer Room\nPackage Rate"
-  },
-  {
-   "fieldname": "applicable_to",
-   "fieldtype": "Select",
-   "label": "Applicable To",
-   "options": "Room Type\nSpecific Room\nAll Rooms"
   },
   {
    "fieldname": "rules_and_conditions_tab",
@@ -120,6 +210,40 @@
    "label": "Allow Discount"
   },
   {
+   "fieldname": "stay_restrictions_section",
+   "fieldtype": "Section Break",
+   "label": "Stay Restrictions"
+  },
+  {
+   "default": "0",
+   "description": "Guests cannot begin a new stay on dates where this rate is closed to arrival.",
+   "fieldname": "closed_to_arrival",
+   "fieldtype": "Check",
+   "label": "Closed to Arrival"
+  },
+  {
+   "fieldname": "column_break_restr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Guests cannot check out on dates where this rate is closed to departure.",
+   "fieldname": "closed_to_departure",
+   "fieldtype": "Check",
+   "label": "Closed to Departure"
+  },
+  {
+   "fieldname": "long_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "Long Info"
+  },
+  {
+   "description": "Extended guest-facing description. Printed on confirmation letters and displayed in the rate query grid.",
+   "fieldname": "long_info",
+   "fieldtype": "Text Editor",
+   "label": "Long Info / Guest Description"
+  },
+  {
    "fieldname": "visibility_tab",
    "fieldtype": "Tab Break",
    "label": "Visibility"
@@ -149,30 +273,12 @@
    "fieldname": "internal_use_only",
    "fieldtype": "Check",
    "label": "Internal Use Only"
-  },
-  {
-   "fieldname": "column_break_rucr",
-   "fieldtype": "Column Break"
-  },
-  {
-   "depends_on": "eval:doc.applicable_to == 'Room Type'",
-   "fieldname": "room_type",
-   "fieldtype": "Link",
-   "label": "Room Type",
-   "options": "Room Type"
-  },
-  {
-   "depends_on": "eval:doc.applicable_to == 'Specific Room'",
-   "fieldname": "specific_room",
-   "fieldtype": "Link",
-   "label": "Specific Room",
-   "options": "Room"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-18 15:15:18.219594",
+ "modified": "2026-02-19 18:28:31.467617",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Rate Type",
