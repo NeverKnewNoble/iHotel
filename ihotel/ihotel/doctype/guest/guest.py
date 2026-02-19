@@ -22,3 +22,20 @@ class Guest(Document):
 				phone = phone[1:]
 			if not phone.isdigit() or len(phone) < 7 or len(phone) > 15:
 				frappe.throw(_("Please enter a valid phone number (7-15 digits)"))
+
+
+@frappe.whitelist()
+def get_guest_stats(guest_name):
+	"""Return computed stay statistics for a guest."""
+	result = frappe.db.sql("""
+		SELECT
+			COUNT(name)                          AS total_stays,
+			IFNULL(SUM(nights), 0)               AS total_nights,
+			IFNULL(SUM(total_amount), 0)         AS total_revenue,
+			MAX(DATE(actual_check_in))           AS last_stay_date
+		FROM `tabCheck In`
+		WHERE guest = %s
+		  AND status = 'Checked Out'
+		  AND docstatus = 1
+	""", guest_name, as_dict=True)
+	return result[0] if result else {}

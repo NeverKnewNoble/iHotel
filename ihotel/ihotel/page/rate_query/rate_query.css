@@ -1,0 +1,267 @@
+/* Rate Query Page */
+
+.rq-wrapper {
+	padding: 16px;
+	max-width: 100%;
+}
+
+/* ─── Search bar ─── */
+.rq-search-bar {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 16px 20px;
+	margin-bottom: 16px;
+}
+
+.rq-fields-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: flex-end;
+}
+
+.rq-fields-row-2 {
+	margin-top: 12px;
+}
+
+.rq-field {
+	display: flex;
+	flex-direction: column;
+	min-width: 140px;
+}
+
+.rq-field-sm {
+	min-width: 80px;
+	max-width: 100px;
+}
+
+.rq-field-guest {
+	flex: 1;
+	min-width: 280px;
+}
+
+.rq-label {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--text-muted);
+	margin-bottom: 4px;
+}
+
+.rq-guest-wrap {
+	position: relative;
+}
+
+.rq-guest-suggestions {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 6px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	max-height: 200px;
+	overflow-y: auto;
+	display: none;
+}
+
+.rq-suggestion-item {
+	padding: 8px 12px;
+	cursor: pointer;
+	font-size: 13px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.rq-suggestion-item:last-child {
+	border-bottom: none;
+}
+
+.rq-suggestion-item:hover {
+	background: var(--bg-color);
+}
+
+.rq-search-action {
+	display: flex;
+	align-items: flex-end;
+	padding-bottom: 1px;
+}
+
+/* ─── Legend ─── */
+.rq-legend {
+	font-size: 12px;
+	color: var(--text-muted);
+	margin-bottom: 10px;
+}
+
+.rq-avail-dot   { color: #16a34a; }
+.rq-unavail-dot { color: #dc2626; }
+
+/* ─── Result summary ─── */
+.rq-result-summary {
+	font-size: 14px;
+	margin-bottom: 12px;
+}
+
+/* ─── Grid ─── */
+.rq-grid-wrap {
+	overflow-x: auto;
+}
+
+.rq-table {
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 500px;
+	font-size: 13px;
+}
+
+.rq-table thead th {
+	background: var(--subtle-fg);
+	border: 1px solid var(--border-color);
+	padding: 8px 10px;
+	vertical-align: bottom;
+	white-space: nowrap;
+}
+
+.rq-th-rate {
+	width: 160px;
+	min-width: 140px;
+}
+
+.rq-th-room {
+	text-align: center;
+	min-width: 130px;
+}
+
+.rq-rt-name {
+	font-weight: 600;
+}
+
+.rq-avail-count   { color: #16a34a; font-size: 11px; margin-top: 2px; }
+.rq-unavail-count { color: #dc2626; font-size: 11px; margin-top: 2px; }
+
+.rq-table tbody td {
+	border: 1px solid var(--border-color);
+	padding: 6px 10px;
+	vertical-align: top;
+}
+
+/* Rate label column */
+.rq-td-rate {
+	background: var(--subtle-fg);
+	white-space: nowrap;
+}
+
+.rq-rate-code {
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.rq-rate-name {
+	font-size: 11px;
+	color: var(--text-muted);
+	margin-top: 1px;
+}
+
+.rq-rate-badges {
+	margin-top: 3px;
+}
+
+/* Rate cells */
+.rq-cell {
+	text-align: center;
+	cursor: pointer;
+	transition: filter 0.1s;
+}
+
+.rq-cell:hover {
+	filter: brightness(0.95);
+}
+
+.rq-cell-avail {
+	background: #dcfce7;
+	color: #15803d;
+}
+
+.rq-cell-unavail {
+	background: #fee2e2;
+	color: #b91c1c;
+	cursor: default;
+}
+
+.rq-cell-selected {
+	outline: 3px solid #2563eb;
+	outline-offset: -2px;
+}
+
+.rq-cell-rate {
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.rq-cell-total {
+	font-size: 11px;
+	opacity: 0.8;
+}
+
+.rq-cell-restrict {
+	font-size: 10px;
+	margin-top: 2px;
+	opacity: 0.8;
+}
+
+/* ─── Info Panel ─── */
+.rq-info-panel {
+	margin-top: 16px;
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-left: 4px solid #2563eb;
+	border-radius: 8px;
+	padding: 16px 20px;
+}
+
+.rq-info-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.rq-info-row {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	font-size: 13px;
+}
+
+.rq-info-lbl {
+	font-weight: 600;
+	min-width: 140px;
+	color: var(--text-muted);
+	flex-shrink: 0;
+}
+
+.rq-info-rate {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.rq-avail-text   { color: #16a34a; font-weight: 600; }
+.rq-unavail-text { color: #dc2626; font-weight: 600; }
+
+.rq-info-actions {
+	margin-top: 8px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .rq-cell-avail {
+	background: #14532d;
+	color: #86efac;
+}
+
+[data-theme="dark"] .rq-cell-unavail {
+	background: #450a0a;
+	color: #fca5a5;
+}

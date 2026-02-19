@@ -2,6 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:guest",
+ "default_view": "Calendar",
  "creation": "2025-11-13 23:02:20.996524",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -27,6 +28,11 @@
   "room_rate",
   "column_break_osgw",
   "total_amount",
+  "guest_services_section",
+  "do_not_disturb",
+  "make_up_room",
+  "column_break_gsvc",
+  "turndown_requested",
   "section_break_ygin",
   "additional_services",
   "folio_tab",
@@ -132,6 +138,36 @@
    "label": "Total Amount"
   },
   {
+   "fieldname": "guest_services_section",
+   "fieldtype": "Section Break",
+   "label": "Guest Services"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "do_not_disturb",
+   "fieldtype": "Check",
+   "label": "Do Not Disturb"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "make_up_room",
+   "fieldtype": "Check",
+   "label": "Make Up Room"
+  },
+  {
+   "fieldname": "column_break_gsvc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "turndown_requested",
+   "fieldtype": "Check",
+   "label": "Turndown Requested"
+  },
+  {
    "fieldname": "section_break_ygin",
    "fieldtype": "Section Break"
   },
@@ -170,7 +206,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Hotel Stay",
+   "options": "Check In",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -199,7 +235,7 @@
  "modified": "2026-02-18 16:13:57.906438",
  "modified_by": "Administrator",
  "module": "iHotel",
- "name": "Hotel Stay",
+ "name": "Check In",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

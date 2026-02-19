@@ -49,7 +49,7 @@ def get_data(filters):
 			SUM(hs.nights) as total_nights,
 			SUM(hs.total_amount) as total_revenue,
 			AVG(hs.room_rate) as avg_rate
-		FROM `tabHotel Stay` hs
+		FROM `tabCheck In` hs
 		WHERE {where}
 		GROUP BY hs.room_type, hs.business_source
 		ORDER BY total_revenue DESC

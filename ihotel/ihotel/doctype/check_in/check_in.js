@@ -1,7 +1,7 @@
 // Copyright (c) 2025, Noble and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Hotel Stay", {
+frappe.ui.form.on("Check In", {
 	onload: function(frm) {
 		setup_room_query(frm);
 		setup_rate_type_query(frm);
@@ -21,11 +21,86 @@ frappe.ui.form.on("Hotel Stay", {
 		}
 
 		if (frm.doc.status === "Checked In" && !frm.is_new()) {
+			// DND toggle
+			frm.add_custom_button(
+				frm.doc.do_not_disturb ? __("Clear DND") : __("Set DND"),
+				function() {
+					frm.set_value("do_not_disturb", frm.doc.do_not_disturb ? 0 : 1);
+					frm.save();
+				}, __("Guest Services")
+			);
+
+			// MUR toggle
+			frm.add_custom_button(
+				frm.doc.make_up_room ? __("Clear Make Up Room") : __("Make Up Room"),
+				function() {
+					frm.set_value("make_up_room", frm.doc.make_up_room ? 0 : 1);
+					frm.save();
+				}, __("Guest Services")
+			);
+
+			// Turndown toggle
+			frm.add_custom_button(
+				frm.doc.turndown_requested ? __("Cancel Turndown") : __("Request Turndown"),
+				function() {
+					frm.set_value("turndown_requested", frm.doc.turndown_requested ? 0 : 1);
+					frm.save();
+				}, __("Guest Services")
+			);
+
 			frm.add_custom_button(__("Check Out"), function() {
 				frm.set_value("status", "Checked Out");
 				frm.set_value("actual_check_out", frappe.datetime.now_datetime());
 				frm.save();
 			});
+
+			frm.add_custom_button(__("Room Move"), function() {
+				const d = new frappe.ui.Dialog({
+					title: __("Move Guest to Another Room"),
+					fields: [
+						{
+							fieldtype: "Data",
+							fieldname: "current_room",
+							label: __("Current Room"),
+							default: frm.doc.room || __("(none)"),
+							read_only: 1,
+						},
+						{
+							fieldtype: "Link",
+							fieldname: "new_room",
+							label: __("Move to Room"),
+							options: "Room",
+							reqd: 1,
+							get_query: function () {
+								return { filters: { status: "Available" } };
+							},
+						},
+						{
+							fieldtype: "Small Text",
+							fieldname: "reason",
+							label: __("Reason (optional)"),
+						},
+					],
+					primary_action_label: __("Confirm Move"),
+					primary_action(values) {
+						frappe.call({
+							method: "ihotel.ihotel.doctype.check_in.check_in.move_room",
+							args: {
+								check_in_name: frm.doc.name,
+								new_room: values.new_room,
+								reason: values.reason || "",
+							},
+							callback(r) {
+								if (r.message) {
+									d.hide();
+									frm.reload_doc();
+								}
+							},
+						});
+					},
+				});
+				d.show();
+			}, __("Actions"));
 		}
 	},
 
@@ -106,19 +181,45 @@ frappe.ui.form.on("Hotel Stay", {
 	},
 
 	rate_type(frm) {
-		if (frm.doc.rate_type) {
-			frappe.db.get_doc("Rate Type", frm.doc.rate_type).then((rate) => {
-				let indicators = [];
-				if (rate.includes_breakfast) indicators.push("Breakfast included");
-				if (rate.refundable) indicators.push("Refundable");
-				if (rate.includes_taxes) indicators.push("Taxes included");
-				if (indicators.length) {
-					frm.set_intro(indicators.join(" | "), "blue");
-				}
-			});
-		} else {
+		if (!frm.doc.rate_type) {
 			frm.set_intro("");
+			return;
 		}
+		frappe.db.get_doc("Rate Type", frm.doc.rate_type).then((rate) => {
+			// --- indicators ---
+			let indicators = [];
+			if (rate.includes_breakfast) indicators.push("Breakfast included");
+			if (rate.refundable)         indicators.push("Refundable");
+			if (rate.includes_taxes)     indicators.push("Taxes included");
+			frm.set_intro(indicators.length ? indicators.join(" | ") : "", "blue");
+
+			// --- rate autofill ---
+			let resolved_rate = null;
+			const today = frappe.datetime.get_today();
+			const room_type = frm.doc.room_type || "";
+
+			if (rate.rate_schedule && rate.rate_schedule.length) {
+				// Find the best matching schedule row
+				for (const row of rate.rate_schedule) {
+					const type_match = !row.room_type || row.room_type === room_type;
+					const in_range   = (!row.from_date || row.from_date <= today) &&
+					                   (!row.to_date   || row.to_date   >= today);
+					if (type_match && in_range && row.rate) {
+						resolved_rate = row.rate;
+						break;
+					}
+				}
+			}
+
+			if (!resolved_rate && rate.base_rate) {
+				resolved_rate = rate.base_rate;
+			}
+
+			if (resolved_rate) {
+				frm.set_value("room_rate", resolved_rate);
+				frm.trigger("calculate_total");
+			}
+		});
 	},
 
 	calculate_total(frm) {
@@ -150,7 +251,7 @@ function setup_rate_type_query(frm) {
 	frm.set_query("rate_type", function() {
 		if (frm.doc.room_type) {
 			return {
-				query: "ihotel.ihotel.doctype.hotel_stay.hotel_stay.get_rate_types_for_room_type",
+				query: "ihotel.ihotel.doctype.check_in.check_in.get_rate_types_for_room_type",
 				filters: { room_type: frm.doc.room_type },
 			};
 		}
@@ -163,7 +264,7 @@ function setup_room_query(frm) {
 	frm.set_query("room", function() {
 		if (frm.doc.room_type) {
 			return {
-				query: "ihotel.ihotel.doctype.hotel_stay.hotel_stay.get_rooms_for_room_type",
+				query: "ihotel.ihotel.doctype.check_in.check_in.get_rooms_for_room_type",
 				filters: { room_type: frm.doc.room_type },
 			};
 		}

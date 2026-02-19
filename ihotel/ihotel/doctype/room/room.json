@@ -12,6 +12,10 @@
   "column_break_fidn",
   "room_type",
   "status",
+  "smoking",
+  "bed_type",
+  "section_break_features",
+  "room_features",
   "section_break_tezv",
   "maintenance_notes"
  ],
@@ -40,15 +44,39 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Available\nOccupied\nOut of Order\nHousekeeping"
+   "options": "Available\nOccupied\nDirty\nPickup\nInspected\nHousekeeping\nOut of Order\nOut of Service"
   },
   {
    "fieldname": "column_break_fidn",
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
+   "fieldname": "smoking",
+   "fieldtype": "Check",
+   "label": "Smoking Room"
+  },
+  {
+   "fieldname": "bed_type",
+   "fieldtype": "Select",
+   "label": "Bed Type",
+   "options": "\nSingle\nDouble\nQueen\nKing\nTwin\nSofa Bed\nBunk Bed"
+  },
+  {
+   "fieldname": "section_break_features",
+   "fieldtype": "Section Break",
+   "label": "Room Features"
+  },
+  {
+   "fieldname": "room_features",
+   "fieldtype": "Table",
+   "label": "Room Features",
+   "options": "Room Feature Item"
+  },
+  {
    "fieldname": "section_break_tezv",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Maintenance"
   },
   {
    "fieldname": "maintenance_notes",

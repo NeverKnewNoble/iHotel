@@ -27,7 +27,7 @@ def on_hotel_stay_update(doc, method):
 						doc.actual_check_out or doc.expected_check_out or "",
 						frappe.format_value(doc.total_amount, {"fieldtype": "Currency"}),
 					),
-					reference_doctype="Hotel Stay",
+					reference_doctype="Check In",
 					reference_name=doc.name,
 				)
 			except Exception:

@@ -16,7 +16,7 @@
  "name": "Arrivals And Departures",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "Hotel Stay",
+ "ref_doctype": "Check In",
  "report_name": "Arrivals And Departures",
  "report_type": "Script Report",
  "roles": [

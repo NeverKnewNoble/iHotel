@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "creation": "2026-02-19 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "preference_group",
+  "preference_code",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "preference_group",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Group",
+   "options": "Smoking\nFloor\nRoom Features\nSpecials\nInterests",
+   "reqd": 1
+  },
+  {
+   "fieldname": "preference_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Preference",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-02-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "iHotel",
+ "name": "Guest Preference",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

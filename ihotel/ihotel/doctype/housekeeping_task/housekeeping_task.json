@@ -16,7 +16,11 @@
   "column_break_hqzo",
   "cleaned_date",
   "section_break_dcoy",
-  "notes"
+  "notes",
+  "instructions_section",
+  "room_instructions",
+  "column_break_inst",
+  "attendant_instructions"
  ],
  "fields": [
   {
@@ -42,7 +46,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Task Type",
-   "options": "Check-out Cleaning\nStay Over Cleaning\nDeep Cleaning\nMaintenance Cleaning"
+   "options": "Check-out Cleaning\nStay Over Cleaning\nDeep Cleaning\nMaintenance Cleaning\nTurndown"
   },
   {
    "fieldname": "assigned_to",
@@ -77,6 +81,25 @@
    "fieldname": "notes",
    "fieldtype": "Text",
    "label": "Notes"
+  },
+  {
+   "fieldname": "instructions_section",
+   "fieldtype": "Section Break",
+   "label": "Instructions"
+  },
+  {
+   "fieldname": "room_instructions",
+   "fieldtype": "Text",
+   "label": "Room Instructions"
+  },
+  {
+   "fieldname": "column_break_inst",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attendant_instructions",
+   "fieldtype": "Text",
+   "label": "Attendant Instructions"
   }
  ],
  "grid_page_length": 50,

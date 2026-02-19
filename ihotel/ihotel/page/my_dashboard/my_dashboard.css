@@ -54,6 +54,7 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 0;
+    margin-top: 24px;
 }
 
 /* ---------- Header ---------- */
@@ -111,98 +112,6 @@
 @keyframes ih-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
-}
-
-/* ---------- Date Filter ---------- */
-.ih-date-filter {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-    margin-bottom: 24px;
-    padding: 14px 20px;
-    background: var(--ih-card);
-    border: 1px solid var(--ih-border);
-    border-radius: var(--ih-radius);
-    box-shadow: var(--ih-shadow);
-    flex-wrap: wrap;
-}
-
-.ih-filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.ih-filter-group label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--ih-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.ih-date-input {
-    padding: 7px 12px;
-    border: 1px solid var(--ih-border);
-    border-radius: var(--ih-radius-sm);
-    background: var(--ih-bg);
-    color: var(--ih-text);
-    font-size: 13px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    min-width: 160px;
-}
-
-.ih-date-input:focus {
-    border-color: var(--ih-primary);
-    box-shadow: 0 0 0 3px var(--ih-primary-light);
-}
-
-.ih-filter-btn {
-    padding: 7px 16px !important;
-    border-radius: var(--ih-radius-sm) !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    cursor: pointer;
-    transition: all 0.2s !important;
-    border: 1px solid var(--ih-border) !important;
-    background: var(--ih-card) !important;
-    color: var(--ih-text) !important;
-    height: auto !important;
-    line-height: 1.4 !important;
-}
-
-.ih-filter-btn[data-action="apply-filter"] {
-    background: var(--ih-primary) !important;
-    border-color: var(--ih-primary) !important;
-    color: #fff !important;
-}
-
-.ih-filter-btn[data-action="apply-filter"]:hover {
-    background: var(--ih-primary-dark) !important;
-    border-color: var(--ih-primary-dark) !important;
-}
-
-.ih-filter-btn[data-action="clear-filter"]:hover {
-    background: var(--ih-bg) !important;
-}
-
-@media (max-width: 768px) {
-    .ih-date-filter {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .ih-date-input {
-        min-width: unset;
-        width: 100%;
-    }
-
-    .ih-filter-btn {
-        width: 100%;
-        text-align: center;
-    }
 }
 
 /* ---------- KPI Cards ---------- */

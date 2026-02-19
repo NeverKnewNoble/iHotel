@@ -14,7 +14,7 @@ def execute(filters=None):
 def get_columns():
 	return [
 		{"label": "Type", "fieldname": "type", "fieldtype": "Data", "width": 100},
-		{"label": "Stay", "fieldname": "stay", "fieldtype": "Link", "options": "Hotel Stay", "width": 120},
+		{"label": "Stay", "fieldname": "stay", "fieldtype": "Link", "options": "Check In", "width": 120},
 		{"label": "Guest", "fieldname": "guest", "fieldtype": "Link", "options": "Guest", "width": 150},
 		{"label": "Room", "fieldname": "room", "fieldtype": "Link", "options": "Room", "width": 100},
 		{"label": "Room Type", "fieldname": "room_type", "fieldtype": "Link", "options": "Room Type", "width": 120},
@@ -36,7 +36,7 @@ def get_data(filters):
 			room_type,
 			expected_check_in as expected_time,
 			status
-		FROM `tabHotel Stay`
+		FROM `tabCheck In`
 		WHERE DATE(expected_check_in) = %s
 		AND docstatus != 2
 		ORDER BY expected_check_in
@@ -52,7 +52,7 @@ def get_data(filters):
 			room_type,
 			expected_check_out as expected_time,
 			status
-		FROM `tabHotel Stay`
+		FROM `tabCheck In`
 		WHERE DATE(expected_check_out) = %s
 		AND docstatus != 2
 		ORDER BY expected_check_out

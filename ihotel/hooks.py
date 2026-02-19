@@ -169,7 +169,7 @@ scheduler_events = {
 
 # Document Events
 doc_events = {
-	"Hotel Stay": {
+	"Check In": {
 		"on_update_after_submit": "ihotel.notifications.on_hotel_stay_update",
 	},
 	"Reservation": {

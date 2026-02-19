@@ -9,13 +9,20 @@
   "room",
   "status",
   "column_break_elhu",
-  "issue_type",
+  "category",
   "priority",
+  "maintenance_type",
   "section_break_aegl",
   "reported_by",
   "assigned_to",
   "column_break_ekyc",
   "reported_date",
+  "linked_ooo",
+  "scheduling_section",
+  "scheduled_date",
+  "recurrence",
+  "column_break_sched",
+  "next_due_date",
   "section_break_yjby",
   "description",
   "section_break_xdmr",
@@ -25,6 +32,7 @@
   {
    "fieldname": "room",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Room",
    "options": "Room"
   },
@@ -40,11 +48,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "issue_type",
-   "fieldtype": "Select",
+   "fieldname": "category",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Issue Type",
-   "options": "Electrical\nPlumbing\nHVAC\nFurniture\nAppliance\nOther"
+   "label": "Category",
+   "options": "Maintenance Category"
   },
   {
    "fieldname": "priority",
@@ -52,6 +60,13 @@
    "in_list_view": 1,
    "label": "Priority",
    "options": "Low\nMedium\nHigh\nCritical"
+  },
+  {
+   "default": "Reactive",
+   "fieldname": "maintenance_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Reactive\nPreventive"
   },
   {
    "fieldname": "section_break_aegl",
@@ -80,6 +95,45 @@
    "label": "Reported Date"
   },
   {
+   "description": "Room Out of Order record linked to this request.",
+   "fieldname": "linked_ooo",
+   "fieldtype": "Link",
+   "label": "Linked OOO",
+   "options": "Room Out of Order",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.maintenance_type == 'Preventive'",
+   "fieldname": "scheduling_section",
+   "fieldtype": "Section Break",
+   "label": "Scheduling"
+  },
+  {
+   "depends_on": "eval:doc.maintenance_type == 'Preventive'",
+   "fieldname": "scheduled_date",
+   "fieldtype": "Date",
+   "label": "Scheduled Date"
+  },
+  {
+   "depends_on": "eval:doc.maintenance_type == 'Preventive'",
+   "default": "None",
+   "fieldname": "recurrence",
+   "fieldtype": "Select",
+   "label": "Recurrence",
+   "options": "None\nWeekly\nMonthly\nQuarterly\nYearly"
+  },
+  {
+   "fieldname": "column_break_sched",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.maintenance_type == 'Preventive'",
+   "fieldname": "next_due_date",
+   "fieldtype": "Date",
+   "label": "Next Due Date",
+   "read_only": 1
+  },
+  {
    "fieldname": "section_break_yjby",
    "fieldtype": "Section Break"
   },
@@ -101,7 +155,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-16 20:13:54.120655",
+ "modified": "2026-02-19 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "iHotel",
  "name": "Maintenance Request",
